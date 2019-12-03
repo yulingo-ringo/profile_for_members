@@ -4,7 +4,9 @@ class SlackController < ApplicationController
     end
 
     def create
-        render json: params[:challenge]
+        render json: {
+            challenge:params[:challenge]
+        }
     end
 
 end
