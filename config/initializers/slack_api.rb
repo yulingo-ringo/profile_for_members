@@ -1,7 +1,7 @@
 require 'slack'
 
 Slack.configure do |config|
-  config.token = ENV['BOT_TOKEN']="xoxp-779091419522-791405671428-856691438550-e20449b7b0029e2013689c14fd63738c"
+  config.token = ENV['BOT_TOKEN']
 end
 
 Slack::Web::Client.config do |config|

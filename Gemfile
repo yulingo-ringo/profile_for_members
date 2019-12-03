@@ -9,6 +9,9 @@ gem 'rails', '~> 5.2.4'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+gem "hashie"
+gem "faraday"
+gem "faraday_middleware"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -43,3 +46,11 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "json-schema", "~> 2.8"
+
+gem "erubis", "~> 2.7"
+
+gem 'async-websocket', '~> 0.8.0'
+
+gem "slack-ruby-client"
