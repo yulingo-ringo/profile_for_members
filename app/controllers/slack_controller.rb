@@ -4,9 +4,13 @@ class SlackController < ApplicationController
     end
 
     def create
-        render json: {
-            challenge:params[:challenge]
-        }
-    end
+        @body = JSON.parse(request.body.read)
+        case @body['type']
+        when 'url_verification'
+          render json: @body
+        when 'event_callback'
+          # ..
+        end
+      end
 
 end
