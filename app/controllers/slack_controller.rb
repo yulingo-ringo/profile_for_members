@@ -7,7 +7,7 @@ class SlackController < ApplicationController
         @body = JSON.parse(request.body.read)
         case @body['type']
         when 'url_verification'
-          render json: @body['challenge']
+          render json: @body
         when 'event_callback'
           # ..
         end
