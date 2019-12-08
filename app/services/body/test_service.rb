@@ -1,6 +1,8 @@
 module Body
   class TestService
-    puts("hello")
+    puts ("hello")
+    puts (@body)
+
     # def web_client
     #   @web_client ||= Slack::Web::Client.new
     # end

@@ -11,6 +11,7 @@ class SlackController < ApplicationController
         when 'event_callback'
             # ..
         end
+        Body::TestService.new
     end
 
 end
