@@ -11,7 +11,19 @@ class SlackController < ApplicationController
         when 'event_callback'
             # ..
         end
-        Body::TestService.new
+        @json_hash  = params[:slack]
+        client = Body::TestService.new
+        client.json = @json_hash
+        
+    end
+
+    def new
+        hash = JSON.parse(json_str)
+        members=hash["members"]
+        members.each do |member|
+            @user=User.new(user_id:member["id"],name:member["name"])
+            @user.save
+        end
     end
 
 end
