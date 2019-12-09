@@ -61,6 +61,8 @@ GEM
     concurrent-ruby (1.1.5)
     console (1.6.0)
     crass (1.0.5)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
     erubi (1.9.0)
     erubis (2.7.0)
     faraday (0.17.1)
@@ -68,11 +70,25 @@ GEM
     faraday_middleware (0.13.1)
       faraday (>= 0.7.4, < 1.0)
     ffi (1.11.3)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (4.0.0)
+    http (4.2.0)
+      addressable (~> 2.3)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.0)
+      http-parser (~> 1.2.0)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    http-form_data (2.1.1)
+    http-parser (1.2.1)
+      ffi-compiler (>= 1.0, < 2.0)
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
+    json (2.2.0)
     json-schema (2.8.1)
       addressable (>= 2.4)
     listen (3.1.5)
@@ -147,6 +163,9 @@ GEM
     timers (4.3.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.6)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -162,6 +181,8 @@ DEPENDENCIES
   faraday
   faraday_middleware
   hashie
+  http
+  json
   json-schema (~> 2.8)
   listen (>= 3.0.5, < 3.2)
   mysql2 (>= 0.4.4, < 0.6.0)

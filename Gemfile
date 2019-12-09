@@ -12,6 +12,8 @@ gem 'puma', '~> 3.11'
 gem "hashie"
 gem "faraday"
 gem "faraday_middleware"
+gem "http"
+gem "json"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
