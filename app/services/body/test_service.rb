@@ -12,21 +12,21 @@ module Body
       end
 
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
-      if self.json["event"]["text"] =="<@#{self.json["event"]["user"]}>"#自分の時
+      if @json["event"]["text"] =="<@#{@json["event"]["user"]}>"#自分の時
         conn.post do |req|
           req.url '/api/chat.postMessage'
           req.body = {
             :token => :ENV['BOT_OAUTH_TOKEN'],
-            :channel => :self.json["event"]["channel"],
-            :text  => "<@#{self.json["event"]["user"]}>,your url is not ready"
+            :channel => @json["event"]["channel"],
+            :text  => "<@#{@json["event"]["user"]}>,your url is not ready"
           }
         end
         
-      elsif self.json["event"]["text"].include?("<@")
+      elsif @json["event"]["text"].include?("<@")
         req.url '/api/chat.postMessage'
           req.body = {
             :token => :ENV['BOT_OAUTH_TOKEN'],
-            :channel => :self.json["event"]["channel"],
+            :channel => @json["event"]["channel"],
             :text  => "Your friend has not finished writing his profile"
           }
         
@@ -35,7 +35,7 @@ module Body
           req.url '/api/chat.postMessage'
           req.body = {
             :token => :ENV['BOT_OAUTH_TOKEN'],
-            :channel => :self.json["event"]["channel"],
+            :channel => @json["event"]["channel"],
             :text  => "sorry, I don't understand. Please mention someone ¯\_(ツ)_/¯"
           }
         end
