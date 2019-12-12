@@ -13,7 +13,7 @@ class SlackController < ApplicationController
             # ..
         end
         json_hash  = params[:slack]
-        Body::TestService.new(json_hash).execute      
+        #Body::TestService.new(json_hash).execute      
     end
 
     def new
