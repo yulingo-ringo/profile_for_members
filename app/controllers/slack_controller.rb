@@ -4,6 +4,7 @@ class SlackController < ApplicationController
     end
 
     def create
+        p params
         @body = JSON.parse(request.body.read)
         case @body['type']
         when 'url_verification'
