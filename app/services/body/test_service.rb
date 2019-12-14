@@ -32,7 +32,7 @@ module Body
           }'
           body= JSON.parse(json_str)
         
-        conn.authorization=ENV['BOT_OAUTH_TOKEN']
+        conn.authorization):=ENV['BOT_OAUTH_TOKEN']
         conn.post '/api/chat.postMessage', body
           #conn.post do |req|
           #req.url '/api/chat.postMessage'
