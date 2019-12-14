@@ -14,12 +14,11 @@ module Body
 
       p @json[:event][:text]
       p "<@#{@json[:event][:user]}>"
-      p ENV["TOKEN"]
+      p ENV["SLACK_BOT_USER_TOKEN"]
 
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
       if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
         json_str='{
-          "token":ENV["TOKEN"],
           "ok": true,
           "channel": "CP9RQQL7P",
           "ts": "1576302514.000100",
@@ -33,7 +32,7 @@ module Body
           }
           }'
           body= JSON.parse(json_str)
-        conn.post '/api/chat.postMessage', body, {"Content-type" => "application/json"}
+        conn.post '/api/chat.postMessage', body, {"Content-type" => "application/json","Authorization"=>ENV["SLACK_BOT_USER_TOKEN"]}
           #conn.post do |req|
           #req.url '/api/chat.postMessage'
           
