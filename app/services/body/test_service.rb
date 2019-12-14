@@ -38,6 +38,7 @@ module Body
           #  :channel => @json[:event][:channel],
           #  :text  => "<@#{@json[:event][:user]}>,your url is not ready"
           #}
+          p req.body
         end
         
       elsif @json[:event][:text].include?("<@")
