@@ -21,3 +21,4 @@
 /.env
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+./app/services/body/test_service.rb
