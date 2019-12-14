@@ -54,3 +54,5 @@ gem "json-schema", "~> 2.8"
 gem "erubis", "~> 2.7"
 
 gem 'async-websocket', '~> 0.8.0'
+
+gem 'dotenv-rails'
