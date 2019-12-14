@@ -4,13 +4,15 @@ module Body
       @json=json
     end
     def execute
-      p @json
+      #p @json
       #Faradayを使って、JSON形式のファイルをPOSTできるようにする
       conn = Faraday::Connection.new(:url => 'https://slack.com') do |builder|
         builder.use Faraday::Request::UrlEncoded  # リクエストパラメータを URL エンコードする
         builder.use Faraday::Response::Logger     # リクエストを標準出力に出力する
         builder.use Faraday::Adapter::NetHttp     # Net/HTTP をアダプターに使う
       end
+
+      p @json[:event][:text]
 
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
       if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
