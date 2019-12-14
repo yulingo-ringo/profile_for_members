@@ -4,6 +4,7 @@ module Body
       @json=json
     end
     def execute
+      p @json
       #Faradayを使って、JSON形式のファイルをPOSTできるようにする
       conn = Faraday::Connection.new(:url => 'https://slack.com') do |builder|
         builder.use Faraday::Request::UrlEncoded  # リクエストパラメータを URL エンコードする
@@ -12,21 +13,21 @@ module Body
       end
 
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
-      if @json["event"]["text"] =="<@#{@json["event"]["user"]}>"#自分の時
+      if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
         conn.post do |req|
           req.url '/api/chat.postMessage'
           req.body = {
-            :token => :ENV['BOT_OAUTH_TOKEN'],
-            :channel => @json["event"]["channel"],
-            :text  => "<@#{@json["event"]["user"]}>,your url is not ready"
+            :token => ENV['BOT_OAUTH_TOKEN'],
+            :channel => @json[:event][:channel],
+            :text  => "<@#{@json[:event][:user]}>,your url is not ready"
           }
         end
         
-      elsif @json["event"]["text"].include?("<@")
+      elsif @json[:event][:text].include?("<@")
         req.url '/api/chat.postMessage'
           req.body = {
-            :token => :ENV['BOT_OAUTH_TOKEN'],
-            :channel => @json["event"]["channel"],
+            :token => ENV['BOT_OAUTH_TOKEN'],
+            :channel => @json[:event][:channel],
             :text  => "Your friend has not finished writing his profile"
           }
         
@@ -34,8 +35,8 @@ module Body
         conn.post do |req|
           req.url '/api/chat.postMessage'
           req.body = {
-            :token => :ENV['BOT_OAUTH_TOKEN'],
-            :channel => @json["event"]["channel"],
+            :token => ENV['BOT_OAUTH_TOKEN'],
+            :channel => @json[:event][:channel],
             :text  => "sorry, I don't understand. Please mention someone ¯\_(ツ)_/¯"
           }
         end
