@@ -18,7 +18,6 @@ module Body
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
       if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
         json_str='{
-          "token": "ENV[BOT_OAUTH_TOKEN]",
           "ok": true,
           "channel": "CP9RQQL7P",
           "ts": "1576302514.000100",
@@ -32,6 +31,8 @@ module Body
           }
           }'
           body= JSON.parse(json_str)
+        
+        conn.authorization(:Authorization, Bearer:ENV['BOT_OAUTH_TOKEN'])
         conn.post '/api/chat.postMessage', body
           #conn.post do |req|
           #req.url '/api/chat.postMessage'
