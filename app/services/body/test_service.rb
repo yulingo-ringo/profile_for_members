@@ -31,9 +31,7 @@ module Body
           }
           }'
           body= JSON.parse(json_str)
-        
-        conn.authorization(:Authorization,ENV['BOT_OAUTH_TOKEN'])
-        conn.post '/api/chat.postMessage', body
+        conn.post '/api/chat.postMessage', body, {"Content-type" => "application/json","Authorization"=>"Bearer ENV['BOT_OAUTH_TOKEN']"}
           #conn.post do |req|
           #req.url '/api/chat.postMessage'
           
