@@ -14,6 +14,7 @@ module Body
 
       p @json[:event][:text]
       p "<@#{@json[:event][:user]}>"
+      p ENV['BOT_OAUTH_TOKEN']
 
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
       if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
