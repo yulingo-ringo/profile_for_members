@@ -42,7 +42,7 @@ module Body
           #  :text  => "<@#{@json[:event][:user]}>,your url is not ready"
           #}
           p body
-        end
+        #end
         
       elsif @json[:event][:text].include?("<@")
         conn.post do |req|
