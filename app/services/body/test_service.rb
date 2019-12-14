@@ -24,12 +24,14 @@ module Body
         end
         
       elsif @json[:event][:text].include?("<@")
-        req.url '/api/chat.postMessage'
-          req.body = {
-            :token => ENV['BOT_OAUTH_TOKEN'],
-            :channel => @json[:event][:channel],
-            :text  => "Your friend has not finished writing his profile"
-          }
+        conn.post do |req|
+          req.url '/api/chat.postMessage'
+            req.body = {
+              :token => ENV['BOT_OAUTH_TOKEN'],
+              :channel => @json[:event][:channel],
+              :text  => "Your friend has not finished writing his profile"
+            }
+          end
         
       else
         conn.post do |req|
