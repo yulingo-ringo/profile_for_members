@@ -32,7 +32,7 @@ module Body
           }
           }'
           body= JSON.parse(json_str)
-        conn.post '/api/chat.postMessage', body, {"Content-type" => "application/json","Authorization"=>"Bearer ENV["SLACK_BOT_USER_TOKEN"]"}
+        conn.post '/api/chat.postMessage', body, {"Content-type" => "application/json","Authorization"=>"Bearer ENV['SLACK_BOT_USER_TOKEN']"}
           #conn.post do |req|
           #req.url '/api/chat.postMessage'
           
