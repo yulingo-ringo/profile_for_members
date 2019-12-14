@@ -18,7 +18,7 @@ module Body
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
       if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
         json_str='{
-          "token": "xoxb-779091419522-856004808113-xLGTXmFCNUSilCdcA2gyN3Nq",
+          "token": "ENV[BOT_OAUTH_TOKEN]",
           "ok": true,
           "channel": "CP9RQQL7P",
           "ts": "1576302514.000100",
