@@ -41,7 +41,7 @@ module Body
             :channel => @json[:event][:channel],
             :text  => "<@#{@json[:event][:user]}>,your url is not ready"
           }
-          conn.post '/api/chat.postMessage.methodapi',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+          conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
           p body
         #end
         
