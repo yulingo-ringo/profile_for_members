@@ -33,15 +33,16 @@ module Body
         #  }'
         #  body= JSON.parse(json_str)
         #conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-          conn.post do |req|
-          req.url '/api/chat.postMessage'
+          #conn.post do |req|
+          #req.url '/api/chat.postMessage'
           #req.body= JSON.parse(json_str)
-          req.body = {
-            :token => ENV['BOT_OAUTH_TOKEN'],
+          body = {
+            :token => ENV['SLACK_BOT_USER_TOKEN'],
             :channel => @json[:event][:channel],
             :text  => "<@#{@json[:event][:user]}>,your url is not ready"
           }
-          p req.body
+          conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+          p body
         end
         
       elsif @json[:event][:text].include?("<@")
