@@ -18,32 +18,32 @@ module Body
 
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
       if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
-        json_str='{
-          "ok": true,
-          "channel": "CP9RQQL7P",
-          "ts": "1576302514.000100",
-          "message": {
-            "type": "message",
-            "subtype": "bot_message",
-            "text": "\u4eca\u304b\u3089\u5e30\u308b\u3088",
-            "ts": "1576302514.000100",
-            "username": "mates_profile_practice_4",
-            "bot_id": "BRDU34RLM"
-          }
-          }'
-          body= JSON.parse(json_str)
-        conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-          #conn.post do |req|
-          #req.url '/api/chat.postMessage'
+        #json_str='{
+        #  "ok": true,
+        #  "channel": "CP9RQQL7P",
+        #  "ts": "1576302514.000100",
+        #  "message": {
+        #    "type": "message",
+        #    "subtype": "bot_message",
+        #    "text": "\u4eca\u304b\u3089\u5e30\u308b\u3088",
+        #    "ts": "1576302514.000100",
+        #    "username": "mates_profile_practice_4",
+        #    "bot_id": "BRDU34RLM"
+        #  }
+        #  }'
+        #  body= JSON.parse(json_str)
+        #conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+          conn.post do |req|
+          req.url '/api/chat.postMessage'
           
-          #req.body= JSON.parse(json_str)
-          #req.body = {
-          #  :token => ENV['BOT_OAUTH_TOKEN'],
-          #  :channel => @json[:event][:channel],
-          #  :text  => "<@#{@json[:event][:user]}>,your url is not ready"
-          #}
-          p body
-        #end
+          req.body= JSON.parse(json_str)
+          req.body = {
+            :token => ENV['BOT_OAUTH_TOKEN'],
+            :channel => @json[:event][:channel],
+            :text  => "<@#{@json[:event][:user]}>,your url is not ready"
+          }
+          p req.body
+        end
         
       elsif @json[:event][:text].include?("<@")
         conn.post do |req|
