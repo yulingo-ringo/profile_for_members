@@ -43,7 +43,7 @@ module Body
           }
           conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
           p body
-        end
+        #end
         
       elsif @json[:event][:text].include?("<@")
         conn.post do |req|
