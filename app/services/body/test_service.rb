@@ -35,8 +35,7 @@ module Body
         #conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
           conn.post do |req|
           req.url '/api/chat.postMessage'
-          
-          req.body= JSON.parse(json_str)
+          #req.body= JSON.parse(json_str)
           req.body = {
             :token => ENV['BOT_OAUTH_TOKEN'],
             :channel => @json[:event][:channel],
