@@ -61,7 +61,7 @@ module Body
             :text  => "sorry, I don't understand. Please mention someone ¯\_(ツ)_/¯"
           }
           conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-        rescue
+          break
       
       end
     end
