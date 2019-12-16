@@ -17,51 +17,52 @@ module Body
       p ENV["SLACK_BOT_USER_TOKEN"]
 
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
-      if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
-        #json_str='{
-        #  "ok": true,
-        #  "channel": "CP9RQQL7P",
-        #  "ts": "1576302514.000100",
-        #  "message": {
-        #    "type": "message",
-        #    "subtype": "bot_message",
-        #    "text": "\u4eca\u304b\u3089\u5e30\u308b\u3088",
-        #    "ts": "1576302514.000100",
-        #    "username": "mates_profile_practice_4",
-        #    "bot_id": "BRDU34RLM"
-        #  }
-        #  }'
-        #  body= JSON.parse(json_str)
-        #conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-          #conn.post do |req|
-          #req.url '/api/chat.postMessage'
-          #req.body= JSON.parse(json_str)
-          body = {
-            :token => ENV['SLACK_BOT_USER_TOKEN'],
-            :channel => @json[:event][:channel],
-            :text  => "<@#{@json[:event][:user]}>,your url is not ready"
-          }
-          conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-          p body
-        #end
-        
-      elsif @json[:event][:text].include?("<@")
+      if @json[:event][:subtype] != "bot_message"
+        if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
+          #json_str='{
+          #  "ok": true,
+          #  "channel": "CP9RQQL7P",
+          #  "ts": "1576302514.000100",
+          #  "message": {
+          #    "type": "message",
+          #    "subtype": "bot_message",
+          #    "text": "\u4eca\u304b\u3089\u5e30\u308b\u3088",
+          #    "ts": "1576302514.000100",
+          #    "username": "mates_profile_practice_4",
+          #    "bot_id": "BRDU34RLM"
+          #  }
+          #  }'
+          #  body= JSON.parse(json_str)
+          #conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+            #conn.post do |req|
+            #req.url '/api/chat.postMessage'
+            #req.body= JSON.parse(json_str)
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
               :channel => @json[:event][:channel],
-              :text  => "Your friend has not finished writing his profile"
+              :text  => "<@#{@json[:event][:user]}>,your url is not ready"
             }
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+            p body
+          #end
           
-        
-      else
-          body = {
-            :token => ENV['SLACK_BOT_USER_TOKEN'],
-            :channel => @json[:event][:channel],
-            :text  => "sorry, I don't understand. Please mention someone ¯\_(ツ)_/¯"
-          }
-          conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-          redirect_to("/getout")
+        elsif @json[:event][:text].include?("<@")
+              body = {
+                :token => ENV['SLACK_BOT_USER_TOKEN'],
+                :channel => @json[:event][:channel],
+                :text  => "Your friend has not finished writing his profile"
+              }
+              conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+            
+          
+        else
+            body = {
+              :token => ENV['SLACK_BOT_USER_TOKEN'],
+              :channel => @json[:event][:channel],
+              :text  => "sorry, I don't understand. Please mention someone ¯\_(ツ)_/¯"
+            }
+            conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+        end
       end
     end
   end
