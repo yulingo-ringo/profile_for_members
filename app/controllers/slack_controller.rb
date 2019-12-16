@@ -3,7 +3,7 @@ class SlackController < ApplicationController
         Body::TestService.new
     end
 
-    def creat
+    def create
         #p params
         @body = JSON.parse(request.body.read)
         case @body['type']
