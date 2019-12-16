@@ -47,7 +47,7 @@ module Body
         
       elsif @json[:event][:text].include?("<@")
             body = {
-              :token => ENV['BOT_OAUTH_TOKEN'],
+              :token => ENV['SLACK_BOT_USER_TOKEN'],
               :channel => @json[:event][:channel],
               :text  => "Your friend has not finished writing his profile"
             }
@@ -56,7 +56,7 @@ module Body
         
       else
           body = {
-            :token => ENV['BOT_OAUTH_TOKEN'],
+            :token => ENV['SLACK_BOT_USER_TOKEN'],
             :channel => @json[:event][:channel],
             :text  => "sorry, I don't understand. Please mention someone ¯\_(ツ)_/¯"
           }
