@@ -24,5 +24,8 @@ class SlackController < ApplicationController
             @user.save
         end
     end
+    
+    def getout
+    end
 
 end
