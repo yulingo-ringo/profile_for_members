@@ -46,24 +46,22 @@ module Body
         #end
         
       elsif @json[:event][:text].include?("<@")
-        conn.post do |req|
-          req.url '/api/chat.postMessage'
-            req.body = {
+            body = {
               :token => ENV['BOT_OAUTH_TOKEN'],
               :channel => @json[:event][:channel],
               :text  => "Your friend has not finished writing his profile"
             }
-          end
+            conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+          
         
       else
-        conn.post do |req|
-          req.url '/api/chat.postMessage'
-          req.body = {
+          body = {
             :token => ENV['BOT_OAUTH_TOKEN'],
             :channel => @json[:event][:channel],
             :text  => "sorry, I don't understand. Please mention someone ¯\_(ツ)_/¯"
           }
-        end
+          conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+      
       end
     end
   end
