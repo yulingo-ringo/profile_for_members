@@ -42,7 +42,7 @@ module Body
               info = JSON.parse(response&.body)
               members=info["members"]
               members.each do |member|
-                p member["id"]
+                p member["name"]
               end
         else
             body = {
