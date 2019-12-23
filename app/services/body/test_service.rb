@@ -34,13 +34,20 @@ module Body
                 :text  => "Your friend has not finished writing his profile"
               }
               conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-        elsif @json[:event][:text].include?("info")
+        elsif @json[:event][:text].include?("info") || @json[:event][:text].include?("help")
               response = conn.get do |req|  
                 req.url '/api/users.list'
                 req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
               end
               info = JSON.parse(response&.body)
               members=info["members"]
+              body = {
+                :token => ENV['SLACK_BOT_USER_TOKEN'],
+                :channel => @json[:event][:channel],
+                :text  => "お困りですか？"
+              }
+              conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+
               members.each do |member|
                 body = {
                   :token => ENV['SLACK_BOT_USER_TOKEN'],
@@ -49,6 +56,13 @@ module Body
                 }
                 conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
               end
+
+              body = {
+                :token => ENV['SLACK_BOT_USER_TOKEN'],
+                :channel => @json[:event][:channel],
+                :text  => "この中のあなたが興味ある人をメンションしてください。名前の前に@をつけるとメンションをすることができます。"
+              }
+              conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
 
         else
             body = {
