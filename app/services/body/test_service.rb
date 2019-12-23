@@ -19,24 +19,6 @@ module Body
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
       if @json[:event][:subtype] != "bot_message"
         if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
-          #json_str='{
-          #  "ok": true,
-          #  "channel": "CP9RQQL7P",
-          #  "ts": "1576302514.000100",
-          #  "message": {
-          #    "type": "message",
-          #    "subtype": "bot_message",
-          #    "text": "\u4eca\u304b\u3089\u5e30\u308b\u3088",
-          #    "ts": "1576302514.000100",
-          #    "username": "mates_profile_practice_4",
-          #    "bot_id": "BRDU34RLM"
-          #  }
-          #  }'
-          #  body= JSON.parse(json_str)
-          #conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-            #conn.post do |req|
-            #req.url '/api/chat.postMessage'
-            #req.body= JSON.parse(json_str)
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
               :channel => @json[:event][:channel],
@@ -44,7 +26,6 @@ module Body
             }
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
             p body
-          #end
           
         elsif @json[:event][:text].include?("<@")
               body = {
@@ -53,8 +34,12 @@ module Body
                 :text  => "Your friend has not finished writing his profile"
               }
               conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-            
-          
+        elsif @json[:event][:text].include?("info")
+              response = conn.get do |req|  
+                req.url '/api/users.list'
+                req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+              end
+              p response
         else
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
