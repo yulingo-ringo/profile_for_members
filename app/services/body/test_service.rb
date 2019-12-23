@@ -42,8 +42,14 @@ module Body
               info = JSON.parse(response&.body)
               members=info["members"]
               members.each do |member|
-                p member["name"]
+                body = {
+                  :token => ENV['SLACK_BOT_USER_TOKEN'],
+                  :channel => @json[:event][:channel],
+                  :text  => "#{member["name"]}"
+                }
+                conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
               end
+
         else
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
