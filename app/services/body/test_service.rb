@@ -63,7 +63,14 @@ module Body
                 :text  => "この中のあなたが興味ある人をメンションしてください。名前の前に@をつけるとメンションをすることができます。"
               }
               conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-
+        elsif @json[:event][:text].include?("database")
+              user=User.find_by(user_id: @json[:event][:user])
+              body = {
+                :token => ENV['SLACK_BOT_USER_TOKEN'],
+                :channel => @json[:event][:channel],
+                :text  => "#{user.user_id}"
+              }
+              conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         else
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
