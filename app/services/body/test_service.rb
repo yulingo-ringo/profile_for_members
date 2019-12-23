@@ -22,7 +22,7 @@ module Body
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
               :channel => @json[:event][:channel],
-              :text  => "<@#{@json[:event][:user]}>,your url is not ready"
+              :text  => "<@#{@json[:event][:user]}>まだURLが用意されていません。"
             }
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
             p body
@@ -31,7 +31,7 @@ module Body
               body = {
                 :token => ENV['SLACK_BOT_USER_TOKEN'],
                 :channel => @json[:event][:channel],
-                :text  => "Your friend has not finished writing his profile"
+                :text  => "その人はまだURLが用意できていません"
               }
               conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         elsif @json[:event][:text].include?("info") || @json[:event][:text].include?("help")
@@ -74,7 +74,7 @@ module Body
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
               :channel => @json[:event][:channel],
-              :text  => "sorry, I don't understand. Please mention someone ¯\_(ツ)_/¯"
+              :text  => "こんにちは！mates_profileはワークスペース内の人たちのことをもう少しよく知るためのボットです。ワークスペース内の人をメンションしてください。helpやinfoなどを含むメッセージを送ってもらえればメンバーの名前をリストアップします:blush:"
             }
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         end
