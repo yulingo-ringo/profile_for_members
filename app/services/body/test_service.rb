@@ -1,5 +1,5 @@
 module Body
-  class TestServices
+  class TestService
     # def initialize(json)
     #   @json=json
     # end
