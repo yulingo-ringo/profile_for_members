@@ -41,7 +41,9 @@ module Body
               end
               info = JSON.parse(response&.body || "{}")
               members=info["members"]
-              p members
+              members.each do |member|
+                p member[:name]
+              end
         else
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
