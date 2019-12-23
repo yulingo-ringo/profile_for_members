@@ -40,7 +40,8 @@ module Body
                 req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
               end
               info = JSON.parse(response&.body || "{}")
-              p info
+              members=info["members"]
+              p members
         else
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
