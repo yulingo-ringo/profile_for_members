@@ -39,7 +39,8 @@ module Body
                 req.url '/api/users.list'
                 req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
               end
-              p response
+              info = JSON.parse(response)
+              p info
         else
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
