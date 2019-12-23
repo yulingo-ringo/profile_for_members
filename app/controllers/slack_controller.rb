@@ -6,8 +6,9 @@ class SlackController < ApplicationController
     def create
         #p params
         @body = JSON.parse(request.body.read)
-        case @body['type']
+        case @body["type"]
         when 'url_verification'
+            p type
             render json: @body
         when 'event_callback'
             # ..
