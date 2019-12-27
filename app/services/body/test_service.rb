@@ -52,7 +52,7 @@ module Body
                 body = {
                   :token => ENV['SLACK_BOT_USER_TOKEN'],
                   :channel => @json[:event][:channel],
-                  :text  => "#{member["profile"]["display_name"]}"
+                  :text  => "#{member["profile"]["real_name"]}"
                 }
                 conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
               end
