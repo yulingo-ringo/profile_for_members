@@ -49,14 +49,14 @@ module Body
               conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
 
               members.each do |member|
-                if member["is_bot"]=="false"
+                #if member["is_bot"]=="false"
                   body = {
                     :token => ENV['SLACK_BOT_USER_TOKEN'],
                     :channel => @json[:event][:channel],
-                    :text  => "#{member["profile"]["real_name"]}"
+                    :text  => "#{member["profile"]["real_name"]},#{member["is_bot"]}"
                   }
                   conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-                end
+                #end
               end
 
               body = {
