@@ -79,7 +79,8 @@ module Body
                             "type": "plain_text",
                             "text": "GO",
                             "emoji": false
-                        }
+                        },
+                      "url": "https://www.tokyodisneyresort.jp/"
                     }
                   ]
               }
