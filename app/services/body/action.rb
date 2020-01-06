@@ -9,7 +9,7 @@ module Body
               builder.use Faraday::Response::Logger     # リクエストを標準出力に出力する
               builder.use Faraday::Adapter::NetHttp     # Net/HTTP をアダプターに使う
           end
-          p @json["message"]["blocks"]["elements"]["text"]["text"]
+          p @json["message"]["blocks"]#["elements"]["text"]["text"]
           view = {
               "type": "modal",
               "title": {
