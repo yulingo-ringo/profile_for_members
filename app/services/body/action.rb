@@ -25,17 +25,17 @@ module Body
                         "text": "あなたが好きな映画は？"
                     },
                     "block_id": "section1",
-                    "accessory": {
-                        "type": "button",
-                        "text": {
-                        "type": "plain_text",
-                        "text": "Click me"
-                        },
-                        "action_id": "button_abc",
-                        "value": "Button value",
-                        "style": "danger"
-                    }
-                    },
+                    # "accessory": {
+                    #     "type": "button",
+                    #     "text": {
+                    #     "type": "plain_text",
+                    #     "text": "Click me"
+                    #     },
+                    #     "action_id": "button_abc",
+                    #     "value": "Button value",
+                    #     "style": "danger"
+                    # }
+                    # },
                     {
                     "type": "input",
                     "label": {
