@@ -35,7 +35,7 @@ module Body
                     #     "value": "Button value",
                     #     "style": "danger"
                     # }
-                    # },
+                     },
                     {
                     "type": "input",
                     "label": {
