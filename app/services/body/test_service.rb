@@ -68,7 +68,7 @@ module Body
                 :text  => "#{User.find_by(user_id: @json[:event][:user]).user_id}"
               }
               conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-        elsif @json[:event][:text]=="button"
+        elsif @json[:event][:text]=="button1"
           block_kit_3=[
               {
                   "type": "actions",
@@ -93,7 +93,31 @@ module Body
                 :blocks => block_kit_3
                 }
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
-
+          elsif @json[:event][:text]=="button2"
+            block_kit_3=[
+                {
+                    "type": "actions",
+                    "elements": [
+                      {
+                        "type": "button",
+                          "text": {
+                              "type": "plain_text",
+                              "text": "Fill in the Blank",
+                              "emoji": false
+                          }
+                      }
+                    ]
+                }
+            ]
+            
+              body = {
+                  :token => ENV['SLACK_BOT_USER_TOKEN'],#あとでherokuで設定します
+                  :channel => @json[:event][:channel],#こうするとDM内に返信できます
+                  :text  => "ボタン",
+                  :blocks => block_kit_3
+                  }
+              conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
+  
         else
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
