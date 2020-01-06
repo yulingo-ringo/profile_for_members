@@ -15,7 +15,7 @@ module Body
                 "type": "modal",
                 "title": {
                     "type": "plain_text",
-                    "text": "Modal title"
+                    "text": "あなたへの質問"
                 },
                 "blocks": [
                     {
