@@ -18,22 +18,18 @@ module Body
 
       #送られて来たメッセージが自分へのメンションなのか他人へのメンションなのか全く関係のないものなのかで場合分け
       if @json[:event][:subtype] != "bot_message"
-        if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
+        if @json[:event][:text].include?("<@")
+          if @json[:event][:text] =="<@#{@json[:event][:user]}>"#自分の時
+            text="<@#{@json[:event][:user]}>まだURLが用意されていません。"  
+          else 
+            text ="その人はまだURLが用意できていません"
+          end
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
               :channel => @json[:event][:channel],
-              :text  => "<@#{@json[:event][:user]}>まだURLが用意されていません。"
+              :text  => text
             }
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-            p body
-          
-        elsif @json[:event][:text].include?("<@")
-              body = {
-                :token => ENV['SLACK_BOT_USER_TOKEN'],
-                :channel => @json[:event][:channel],
-                :text  => "その人はまだURLが用意できていません"
-              }
-              conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         elsif @json[:event][:text].include?("info") || @json[:event][:text].include?("help")
               response = conn.get do |req|  
                 req.url '/api/users.list'
