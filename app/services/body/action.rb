@@ -15,7 +15,7 @@ module Body
                 "type": "modal",
                 "title": {
                     "type": "plain_text",
-                    "text": "あなたへの質問"
+                    "text": "質問箱"
                 },
                 "blocks": [
                     {
