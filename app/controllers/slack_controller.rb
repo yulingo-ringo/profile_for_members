@@ -17,6 +17,13 @@ class SlackController < ApplicationController
         Body::TestService.new(json_hash).execute      
     end
 
+    def action
+        body_before=URI.decode(request.body.read)
+        gonna_parse=body_before.gsub(/payload=/,"")
+        body = JSON.parse(gonna_parse)
+        Body::Action.new(body).interact
+    end
+
     def new
         hash = JSON.parse(json_str)
         members=hash["members"]
