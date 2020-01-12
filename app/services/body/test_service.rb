@@ -10,7 +10,7 @@ module Body
         builder.use Faraday::Adapter::NetHttp    
       end
 
-      natsuo = Faraday::Connection.new(:url => ' https://mates-profile-app.herokuapp.com') do |builder|
+      natsuo = Faraday::Connection.new(:url => 'https://mates-profile-app.herokuapp.com') do |builder|
         builder.use Faraday::Request::UrlEncoded  
         builder.use Faraday::Response::Logger     
         builder.use Faraday::Adapter::NetHttp    
