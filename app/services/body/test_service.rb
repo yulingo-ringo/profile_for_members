@@ -10,7 +10,13 @@ module Body
         builder.use Faraday::Adapter::NetHttp    
       end
 
-      p @json[:event][:text]
+      natsuo = Faraday::Connection.new(:url => ' https://mates-profile-app.herokuapp.com') do |builder|
+        builder.use Faraday::Request::UrlEncoded  
+        builder.use Faraday::Response::Logger     
+        builder.use Faraday::Adapter::NetHttp    
+      end
+
+      p @json
       p "<@#{@json[:event][:user]}>"
       p ENV["SLACK_BOT_USER_TOKEN"]
       if @json[:event][:subtype] != "bot_message"
@@ -62,6 +68,17 @@ module Body
           end
           info = JSON.parse(response&.body)
           p info
+          
+        elsif @json[:event][:text]=="login"
+          response = natsuo.get do |req|  
+            req.url '/login'
+            req.body = {
+              :is_index = true,
+             # :member_slack_id =
+            }
+          end
+          body=bodies(4)
+          conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
           
         elsif @json[:event][:text]=="button1"
           block_kit_3=[
@@ -133,12 +150,19 @@ module Body
           :channel => @json[:event][:channel],
           :text  => "その人はまだURLが用意できていません"
         }
-        when 3 then
-          body = {
-            :token => ENV['SLACK_BOT_USER_TOKEN'],
-            :channel => @json[:event][:channel],
-            :text  => "@名前でメンションしてプロフィールがチェックできます"
-          }
+      when 3 then
+        body = {
+          :token => ENV['SLACK_BOT_USER_TOKEN'],
+          :channel => @json[:event][:channel],
+          :text  => "@名前でメンションしてプロフィールがチェックできます"
+        }
+      when 4 then
+        body = {
+          :token => ENV['SLACK_BOT_USER_TOKEN'],
+          :channel => @json[:event][:channel],
+          :text  => "ログインします"
+        }
+        
         end  
       return body   
     end
