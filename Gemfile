@@ -56,3 +56,5 @@ gem "erubis", "~> 2.7"
 gem 'async-websocket', '~> 0.8.0'
 
 gem 'dotenv-rails'
+
+gem 'websocket-rails'
