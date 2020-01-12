@@ -15,7 +15,7 @@ module Body
             builder.use Faraday::Adapter::NetHttp    
           end
 
-          p @json["message"]["blocks"][0]["elements"][0]["text"]["text"]
+          p @json
           if @json["message"]["blocks"][0]["elements"][0]["text"]["text"] == "Go+to+your+Page"
             response = natsuo.get do |req|  
                 req.url '/login'
