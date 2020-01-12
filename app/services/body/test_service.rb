@@ -57,13 +57,13 @@ module Body
               #   :text  => "この中のあなたが興味ある人をメンションしてください。名前の前に@をつけるとメンションをすることができます。"
               # }
               # conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-        elsif @json[:event][:text].include?("database")
-              body = {
-                :token => ENV['SLACK_BOT_USER_TOKEN'],
-                :channel => @json[:event][:channel],
-                :text  => "#{User.find_by(user_id: @json[:event][:user]).user_id}"
-              }
-              conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+        # elsif @json[:event][:text].include?("database")
+        #       body = {
+        #         :token => ENV['SLACK_BOT_USER_TOKEN'],
+        #         :channel => @json[:event][:channel],
+        #         :text  => "#{User.find_by(user_id: @json[:event][:user]).user_id}"
+        #       }
+        #       conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         elsif @json[:event][:text]=="button1"
           block_kit_3=[
               {
@@ -82,12 +82,7 @@ module Body
               }
           ]
           
-            body = {
-                :token => ENV['SLACK_BOT_USER_TOKEN'],#あとでherokuで設定します
-                :channel => @json[:event][:channel],#こうするとDM内に返信できます
-                :text  => "ボタン",
-                :blocks => block_kit_3
-                }
+            body = bodies(1)
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
           elsif @json[:event][:text]=="button2"
             block_kit_3=[
@@ -124,6 +119,17 @@ module Body
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         end
       end
+    end
+    def bodies(number)
+      case number
+      when 1 then
+        body = {
+          :token => ENV['SLACK_BOT_USER_TOKEN'],
+          :channel => @json[:event][:channel],
+          :text  => "@名前でメンションしてプロフィールがチェックできます"
+        }
+      end  
+      return body   
     end
   end
 end
