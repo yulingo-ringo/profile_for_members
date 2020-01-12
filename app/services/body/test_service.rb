@@ -182,16 +182,14 @@ module Body
               }
           },
           {
-            "type": "section",
-            "text": {
-              "type": "mrkdwn",
-              "text": "あなたのURLはこちらです"
+            "type": "image",
+            "title": {
+              "type": "plain_text",
+              "text": "Please enjoy this photo of a kitten"
             },
-            "accessory": {
-                "type": "image",
-                "image_url": "https://icatcare.org/app/uploads/2018/07/Helping-your-new-cat-or-kitten-settle-in-1.png",
-                "alt_text": "プロフィール書いてね〜"
-              }
+            "block_id": "image4",
+            "image_url": "https://icatcare.org/app/uploads/2018/07/Helping-your-new-cat-or-kitten-settle-in-1.png",
+            "alt_text": "かわいいでしょ"
           },
           {
               "type": "actions",
