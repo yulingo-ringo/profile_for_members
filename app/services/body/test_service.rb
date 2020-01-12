@@ -24,7 +24,6 @@ module Body
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
             body=bodies(1)
           else 
-            p @json[:event][:text].slice!(2,9)
             body=bodies(2)
           end
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
