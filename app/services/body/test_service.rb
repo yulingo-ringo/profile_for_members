@@ -200,7 +200,8 @@ module Body
                         "type": "plain_text",
                         "text": "Go to your Page",
                         "emoji": false
-                    }
+                    },
+                  "url" : "https://www.tokyodisneyresort.jp/tdl/"
                 }
               ]
             }
@@ -233,7 +234,8 @@ module Body
                         "type": "plain_text",
                         "text": "Go to the page",
                         "emoji": false
-                    }
+                    },
+                    "url" : "https://www.tokyodisneyresort.jp/tdl/"
                 }
               ]
             }
