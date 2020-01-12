@@ -235,7 +235,7 @@ module Body
                         "text": "Go to the page",
                         "emoji": false
                     },
-                    "url": "https://www.tokyodisneyresort.jp/tdl/"
+                    "url": "https://www.tokyodisneyresort.jp/tds/"
                 }
               ]
             }
