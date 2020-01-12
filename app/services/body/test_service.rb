@@ -73,7 +73,7 @@ module Body
           response = natsuo.get do |req|  
             req.url '/login'
             req.body = {
-              :is_index = true,
+              :is_index => true,
              # :member_slack_id =
             }
           end
