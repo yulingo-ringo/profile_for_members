@@ -235,7 +235,8 @@ module Body
                         "text": "Go to the page",
                         "emoji": false
                     },
-                    "url": "https://www.tokyodisneyresort.jp/tds/"
+                    "url": "https://www.tokyodisneyresort.jp/tds/",
+                    "value": "#{@json[:event][:text]}"
                 }
               ]
             }
