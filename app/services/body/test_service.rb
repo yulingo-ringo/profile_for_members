@@ -21,7 +21,7 @@ module Body
       p ENV["SLACK_BOT_USER_TOKEN"]
       if @json[:event][:subtype] != "bot_message"
         if @json[:event][:text].include?("<@")
-          if @json[:event][:text] =="<@#{@json[:event][:user]}>"
+          if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
             body=bodies(1)
           else 
             p @json[:event][:text].slice!(2,9)
