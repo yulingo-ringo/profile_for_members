@@ -145,7 +145,8 @@ module Body
         body = {
           :token => ENV['SLACK_BOT_USER_TOKEN'],
           :channel => @json[:event][:channel],
-          :text  => "<@#{@json[:event][:user]}>まだURLが用意されていません。" 
+          :text  => "あなたのURLはこちらです！" ,
+          :blocks => blocks(1)
         }
       when 2 then
         body = {
