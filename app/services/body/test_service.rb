@@ -206,15 +206,38 @@ module Body
             }
           ]
       when 2 then
-        block =[
+        block=[
           {
             "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "Danny Torrence left the following review for your property:"
+                "text": "#{@json[:event][:text]}さんのURLはこちら！"
               }
-          }
-        ] 
+          },
+          {
+            "type": "image",
+            "title": {
+              "type": "plain_text",
+              "text": "これはかわいいかわいいシマエナガ"
+            },
+            "block_id": "image4",
+            "image_url": "https://m.media-amazon.com/images/S/aplus-seller-content-images-us-east-1/A1VC38T7YXB528/AV5NP2VHJS9CI/B078LXFK6Z/TTAp3CfQu2B._UX970_TTW__.jpg",
+            "alt_text": "一生に一回会ってみたいですね"
+          },
+          {
+              "type": "actions",
+              "elements": [
+                {
+                  "type": "button",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "Go to the page",
+                        "emoji": false
+                    }
+                }
+              ]
+            }
+          ]
       end
     end
   end
