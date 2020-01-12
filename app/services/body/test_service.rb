@@ -183,6 +183,10 @@ module Body
           },
           {
             "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "あなたのURLはこちらです"
+            }
             "accessory": {
                 "type": "image",
                 "image_url": "https://icatcare.org/app/uploads/2018/07/Helping-your-new-cat-or-kitten-settle-in-1.png",
