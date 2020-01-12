@@ -17,11 +17,12 @@ module Body
 
           p @json
           if @json["message"]["blocks"][0]["elements"][0]["text"]["text"] == "Go+to+your+Page"
+            p @json["user"]
             response = natsuo.get do |req|  
                 req.url '/login'
                 req.body = {
                   :is_index => true,
-                  :member_slack_id => @json["user"]["id"],
+                  :member_slack_id => @json["user"],
                   :workspace_id => @json["team"]["id"],
                   :slack_user_id => @json["user"]["id"]
                 }
