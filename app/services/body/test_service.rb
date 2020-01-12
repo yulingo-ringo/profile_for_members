@@ -74,9 +74,9 @@ module Body
             req.url '/login'
             req.body = {
               :is_index => true,
-              :member_slack_id = @json[:team_id],
-              :workspace_id = @json[:team_id],
-              :slack_user_id = @json[:event][:user]
+              :member_slack_id => @json[:team_id],
+              :workspace_id => @json[:team_id],
+              :slack_user_id => @json[:event][:user]
             }
           end
           body=bodies(4)
