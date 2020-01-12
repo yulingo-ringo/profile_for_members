@@ -55,6 +55,12 @@ module Body
         #         :text  => "#{User.find_by(user_id: @json[:event][:user]).user_id}"
         #       }
         #       conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+        elsif @json[:event][:text]=="rtm"
+          response = conn.get do |req|  
+            req.url '/api/rtm.connect'
+            req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+          end
+          
         elsif @json[:event][:text]=="button1"
           block_kit_3=[
               {
