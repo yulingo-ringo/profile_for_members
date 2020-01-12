@@ -175,6 +175,13 @@ module Body
       when 1 then
         block=[
           {
+            "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "あなたのURLはこちらです"
+              }
+          },
+          {
               "type": "actions",
               "elements": [
                 {
@@ -188,6 +195,16 @@ module Body
               ]
             }
           ]
+      when 2 then
+        block =[
+          {
+            "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "Danny Torrence left the following review for your property:"
+              }
+          }
+        ] 
       end
     end
   end
