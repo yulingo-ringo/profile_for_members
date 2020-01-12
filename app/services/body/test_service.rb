@@ -16,15 +16,10 @@ module Body
       if @json[:event][:subtype] != "bot_message"
         if @json[:event][:text].include?("<@")
           if @json[:event][:text] =="<@#{@json[:event][:user]}>"
-            text="<@#{@json[:event][:user]}>まだURLが用意されていません。"  
+            body=bodies(1)
           else 
-            text ="その人はまだURLが用意できていません"
+            body=bodies(2)
           end
-            body = {
-              :token => ENV['SLACK_BOT_USER_TOKEN'],
-              :channel => @json[:event][:channel],
-              :text  => text
-            }
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         elsif @json[:event][:text].include?("info") || @json[:event][:text].include?("help")
               #response = conn.get do |req|  
@@ -33,11 +28,7 @@ module Body
               #end
               # info = JSON.parse(response&.body)
               # members=info["members"]
-              body = {
-                :token => ENV['SLACK_BOT_USER_TOKEN'],
-                :channel => @json[:event][:channel],
-                :text  => "@名前でメンションしてプロフィールがチェックできます"
-              }
+              body = bodies(3)
               conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
 
               # members.each do |member|
@@ -82,7 +73,7 @@ module Body
               }
           ]
           
-            body = bodies(1)
+            body = bodies(3)
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
           elsif @json[:event][:text]=="button2"
             block_kit_3=[
@@ -123,6 +114,20 @@ module Body
     def bodies(number)
       case number
       when 1 then
+        body = {
+          :token => ENV['SLACK_BOT_USER_TOKEN'],
+          :channel => @json[:event][:channel],
+          :text  => "<@#{@json[:event][:user]}>まだURLが用意されていません。" 
+        }
+      end  
+    when 2 then
+      body = {
+        :token => ENV['SLACK_BOT_USER_TOKEN'],
+        :channel => @json[:event][:channel],
+        :text  => "その人はまだURLが用意できていません"
+      }
+    end  
+      when 3 then
         body = {
           :token => ENV['SLACK_BOT_USER_TOKEN'],
           :channel => @json[:event][:channel],
