@@ -152,7 +152,8 @@ module Body
         body = {
           :token => ENV['SLACK_BOT_USER_TOKEN'],
           :channel => @json[:event][:channel],
-          :text  => "その人はまだURLが用意できていません"
+          :text  => "#{@json[:event][:text]}さんのURLはこちらです"
+          :blocks => blocks(2)
         }
       when 3 then
         body = {
@@ -178,7 +179,7 @@ module Body
             "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "あなたのURLはこちらです"
+                "text": "あなたのページに行きましょう！"
               }
           },
           {
@@ -211,7 +212,7 @@ module Body
             "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "#{@json[:event][:text]}さんのURLはこちら！"
+                "text": "#{@json[:event][:text]}さんのプロフィールをみてみよう！"
               }
           },
           {
