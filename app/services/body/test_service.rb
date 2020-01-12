@@ -182,8 +182,7 @@ module Body
                         "type": "plain_text",
                         "text": "Go to your Page",
                         "emoji": false
-                    },
-                    "url": "https://mates-profile-app.herokuapp.com/"
+                    }
                 }
               ]
             }
