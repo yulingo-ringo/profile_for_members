@@ -60,6 +60,8 @@ module Body
             req.url '/api/rtm.connect'
             req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
           end
+          info = JSON.parse(response&.body)
+          p info
           
         elsif @json[:event][:text]=="button1"
           block_kit_3=[
