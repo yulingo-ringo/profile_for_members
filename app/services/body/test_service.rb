@@ -119,21 +119,19 @@ module Body
           :channel => @json[:event][:channel],
           :text  => "<@#{@json[:event][:user]}>まだURLが用意されていません。" 
         }
-      end  
-    when 2 then
-      body = {
-        :token => ENV['SLACK_BOT_USER_TOKEN'],
-        :channel => @json[:event][:channel],
-        :text  => "その人はまだURLが用意できていません"
-      }
-    end  
-      when 3 then
+      when 2 then
         body = {
           :token => ENV['SLACK_BOT_USER_TOKEN'],
           :channel => @json[:event][:channel],
-          :text  => "@名前でメンションしてプロフィールがチェックできます"
+          :text  => "その人はまだURLが用意できていません"
         }
-      end  
+        when 3 then
+          body = {
+            :token => ENV['SLACK_BOT_USER_TOKEN'],
+            :channel => @json[:event][:channel],
+            :text  => "@名前でメンションしてプロフィールがチェックできます"
+          }
+        end  
       return body   
     end
   end
