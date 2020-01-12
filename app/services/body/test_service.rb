@@ -169,6 +169,26 @@ module Body
         end  
       return body   
     end
+    def blocks(number)
+      case number
+      when 1 then
+        block=[
+          {
+              "type": "actions",
+              "elements": [
+                {
+                  "type": "button",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "Go to your Page",
+                        "emoji": false
+                    }
+                    "url": "https://mates-profile-app.herokuapp.com/"
+                }
+              ]
+            }
+          ]
+    end
   end
 end
 
