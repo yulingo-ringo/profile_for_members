@@ -185,7 +185,7 @@ module Body
             "type": "image",
             "title": {
               "type": "plain_text",
-              "text": "あなたのページの状況"
+              "text": "プロフィール画像"
             },
             "block_id": "image4",
             "image_url": "https://profile-for-member-delite-quickly.s3-ap-northeast-1.amazonaws.com/myogp.png",
