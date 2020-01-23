@@ -219,7 +219,7 @@ module Body
             "type": "image",
             "title": {
               "type": "plain_text",
-              "text": "#{@json[:event][:text]}さんのプロフィール"
+              "text": "プロフィール画像"
             },
             "block_id": "image4",
             "image_url": "https://profile-for-member-delite-quickly.s3-ap-northeast-1.amazonaws.com/friendsogp.png",
