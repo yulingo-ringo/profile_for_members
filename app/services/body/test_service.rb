@@ -185,11 +185,11 @@ module Body
             "type": "image",
             "title": {
               "type": "plain_text",
-              "text": "Please enjoy this photo of a kitten"
+              "text": "あなたのページの状況"
             },
             "block_id": "image4",
-            "image_url": "https://icatcare.org/app/uploads/2018/07/Helping-your-new-cat-or-kitten-settle-in-1.png",
-            "alt_text": "かわいいでしょ"
+            "image_url": "https://profile-for-member-delite-quickly.s3-ap-northeast-1.amazonaws.com/myogp.png",
+            "alt_text": "下のボタンをクリックしてください"
           },
           {
               "type": "actions",
@@ -219,11 +219,11 @@ module Body
             "type": "image",
             "title": {
               "type": "plain_text",
-              "text": "これはかわいいかわいいシマエナガ"
+              "text": "#{@json[:event][:text]}さんのプロフィール"
             },
             "block_id": "image4",
-            "image_url": "https://m.media-amazon.com/images/S/aplus-seller-content-images-us-east-1/A1VC38T7YXB528/AV5NP2VHJS9CI/B078LXFK6Z/TTAp3CfQu2B._UX970_TTW__.jpg",
-            "alt_text": "一生に一回会ってみたいですね"
+            "image_url": "https://profile-for-member-delite-quickly.s3-ap-northeast-1.amazonaws.com/friendsogp.png",
+            "alt_text": "下のボタンをクリックしてください。"
           },
           {
               "type": "actions",
