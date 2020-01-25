@@ -9,7 +9,7 @@ module Body
               builder.use Faraday::Response::Logger     # リクエストを標準出力に出力する
               builder.use Faraday::Adapter::NetHttp     # Net/HTTP をアダプターに使う
           end
-          natsuo = Faraday::Connection.new(:url => 'https://mates-profile-app.herokuapp.com') do |builder|
+          web = Faraday::Connection.new(:url => 'https://mates-profile-app.herokuapp.com') do |builder|
             builder.use Faraday::Request::UrlEncoded  
             builder.use Faraday::Response::Logger     
             builder.use Faraday::Adapter::NetHttp    
@@ -18,15 +18,14 @@ module Body
           p @json
  #         if @json["message"]["blocks"][0]["elements"][0]["text"]["text"] == "Go+to+your+Page"
             p @json["user"]
-            response = natsuo.get do |req|  
-                req.url '/login'
-                req.body = {
+              body = {
                   :is_index => true,
                   :member_slack_id => @json["user"],
                   :workspace_id => @json["team"]["id"],
                   :slack_user_id => @json["user"]["id"]
                 }
               end
+            web.get '/login',body.to_json, {"Content-type" => 'application/html'}
             # view = {
             #     "type": "modal",
             #     "title": {
