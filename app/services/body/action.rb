@@ -91,6 +91,10 @@ module Body
                   :workspace_id => @json["team"]["id"],
                   :slack_user_id => @json["user"]["id"]
                 }
+                req.headers[:is_index] = "false"
+                req.headers[:member_slack_id] = var["id"]
+                req.headers[:workspace_id] = @json["team"]["id"]
+                req.headers[:slack_user_id] = @json["user"]["id"]
                 p var["id"]
                 p req.body
               end

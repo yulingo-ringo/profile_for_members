@@ -9,12 +9,23 @@ module Body
         builder.use Faraday::Adapter::NetHttp    
       end
       
+      web = Faraday::Connection.new(:url => 'https://mates-profile-app.herokuapp.com') do |builder|
+        builder.use Faraday::Request::UrlEncoded  
+        builder.use Faraday::Response::Logger     
+        builder.use Faraday::Adapter::NetHttp    
+      end
    
       response = conn.get do |req|  
         req.url '/api/conversations.list'
         req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
         req.params[:types] = "im"
       end
+
+      question = web.get do |q|
+        q.url '/api/v1/questions/default'
+        q.params[:is_from_slack] = true
+      end
+
       hash = JSON.parse(response.body)
       #p hash["channels"]
       # for var in hash["channels"] do
