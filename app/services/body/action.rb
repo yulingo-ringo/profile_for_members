@@ -86,7 +86,7 @@ module Body
                 req.url '/login'
              #   req.headers['Content-Type'] = 'application/html'
                 req.body = {
-                  :is_index => true,
+                  :is_index => false,
                   :member_slack_id =>var["id"],
                   :workspace_id => @json["team"]["id"],
                   :slack_user_id => @json["user"]["id"]
