@@ -22,6 +22,15 @@ module Body
       p ENV["SLACK_BOT_USER_TOKEN"]
       if @json[:event][:subtype] != "bot_message"
         if @json[:event][:text].include?("<@")
+            response = conn.get do |req|  
+                req.url '/api/users.list'
+                req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+              end
+               info = JSON.parse(response&.body)
+               members=info["members"]
+               p "この間がメンバー"
+               p members
+               p "この間メンバー"
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
             body=bodies(1)
           else 
