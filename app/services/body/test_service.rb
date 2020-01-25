@@ -33,7 +33,7 @@ module Body
           req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
         end
         team = JSON.parse(response&.body)
-        for var in members do
+        for member in members do
           if member["is_bot"]==false&& member["profile"]["real_name"]!="Slackbot"
             body ={
               :display_name => member["profile"]["real_name"],
