@@ -36,10 +36,10 @@ module Body
         for var in members do
           if member["is_bot"]==false&& member["profile"]["real_name"]!="Slackbot"
             body ={
-              :display_name => member["profile"]["real_name"]
-              :avatar => member["profile"]["image_original"]
-              :slack_user_id => member["id"]
-              :workspace_id => team["team"]["id"]
+              :display_name => member["profile"]["real_name"],
+              :avatar => member["profile"]["image_original"],
+              :slack_user_id => member["id"],
+              :workspace_id => team["team"]["id"],
               :workspace_avatar=> team["team"]["icon"]["image_34"]
             }
             p body
