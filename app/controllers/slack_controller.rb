@@ -33,4 +33,7 @@ class SlackController < ApplicationController
         end
     end
 
+    def lambda
+    end
+
 end

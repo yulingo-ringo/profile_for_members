@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   get "/"=>"slack#index"
   post "/hello"=>"slack#create"
   post "/action"=>"slack#action"
+  get "/lambda"=>"slack#lambda"
 end
 
