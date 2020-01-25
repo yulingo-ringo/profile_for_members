@@ -33,7 +33,7 @@ module Body
                p "この間メンバー"
                for var in members do
                 if @json[:event][:text].include?(var["id"])
-                  p var["id"]
+                  p var["peofile"]["real_name"]
                 end
                end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
