@@ -8,6 +8,12 @@ module Body
         builder.use Faraday::Response::Logger     
         builder.use Faraday::Adapter::NetHttp    
       end
+      response = conn.get do |req|  
+        req.url '/api/conversations.list'
+        req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+        req.params[:types] = "im"
+      end
+      p response
 
       body = {
         :token => ENV['SLACK_BOT_USER_TOKEN'],
