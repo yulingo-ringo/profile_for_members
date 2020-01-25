@@ -34,6 +34,7 @@ module Body
                for var in members do
                 if @json[:event][:text].include?(var["id"])
                   p var["id"]
+                end
                end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
             body=bodies(1)
