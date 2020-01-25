@@ -15,15 +15,75 @@ module Body
             builder.use Faraday::Adapter::NetHttp    
           end
 
+          {"type"=>"block_actions",
+           "team"=>{
+             "id"=>"TPUL203HT", 
+             "domain"=>"mates-ex"
+             }, 
+          "user"=>{
+            "id"=>"UPH64QN9Z", 
+            "username"=>"yulikamiya", 
+            "name"=>"yulikamiya", 
+            "team_id"=>"TPUL203HT"
+            }, 
+          "api_app_id"=>"ARNCWPSH1", 
+          "token"=>"qIWZtvkTjKjwnbh390UYzBdQ", 
+          "container"=>{
+            "type"=>"message", 
+            "message_ts"=>"1579955699.005200", 
+            "channel_id"=>"DRZNAR1RA", 
+            "is_ephemeral"=>false
+            }, 
+          "trigger_id"=>"923831594615.810682003605.8d972393040b6ddeb049715acca6ffb6", 
+          "channel"=>{
+            "id"=>"DRZNAR1RA", 
+            "name"=>"directmessage"
+           }, 
+          "message"=>{
+            "type"=>"message", 
+            "subtype"=>"bot_message", 
+            "text"=>"あなたのURLはこちらです！", 
+            "ts"=>"1579955699.005200", 
+            "username"=>"profile_for_members", 
+            "bot_id"=>"BRZNAQHPW", 
+            "blocks"=>
+            [
+              {
+                "type"=>"section", 
+                "block_id"=>"wkcW", 
+                "text"=>{
+                  "type"=>"mrkdwn", 
+                  "text"=>"あなたのページに行きましょう！", 
+                  "verbatim"=>false
+                  }
+              }, 
+              {
+                "type"=>"image", 
+                "block_id"=>"image4", "image_url"=>"https://profile-for-member-delite-quickly.s3-ap-northeast-1.amazonaws.com/myogp.png", "alt_text"=>"下のボタンをクリックしてください", "title"=>{"type"=>"plain_text", "text"=>"プロフィール画像", "emoji"=>true}, "fallback"=>"842x595px+image", "image_width"=>842, "image_height"=>595, "image_bytes"=>23453}, {"type"=>"actions", "block_id"=>"1HCQe", "elements"=>[{"type"=>"button", "action_id"=>"CK+", "text"=>{"type"=>"plain_text", "text"=>"ゆりさんのページへ！", "emoji"=>false}, "url"=>"https://mates-profile-app.herokuapp.com/"}]}]}, "response_url"=>"https://hooks.slack.com/actions/TPUL203HT/909180714466/TwWmmjJdjFO5i1mVAJUz4nLU", "actions"=>[{"action_id"=>"CK+", "block_id"=>"1HCQe", "text"=>{"type"=>"plain_text", "text"=>"ゆりさんのページへ！", "emoji"=>false}, "type"=>"button", "action_ts"=>"1579955742.969852"}]}
+
           p @json
- #         if @json["message"]["blocks"][0]["elements"][0]["text"]["text"] == "Go+to+your+Page"
+          response = conn.get do |req|  
+            req.url '/api/users.list'
+            req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+          end
+           info = JSON.parse(response&.body)
+           members=info["members"]
+           p "この間がメンバー"
+           p members
+           p "この間メンバー"
+           for var in members do
+            if @json["message"]["text"].include?(var["profile"]["real_name"])
+              p "下が名前"
+              p var["id"]
+            end
+           end
             p @json["user"]
             response = natsuo.get do |req|  
                 req.url '/login'
              #   req.headers['Content-Type'] = 'application/html'
                 req.body = {
                   :is_index => true,
-                  :member_slack_id => @json["user"],
+                  :member_slack_id => var["id"],
                   :workspace_id => @json["team"]["id"],
                   :slack_user_id => @json["user"]["id"]
                 }
