@@ -32,13 +32,10 @@ module Body
                p members
                p "この間メンバー"
                for var in members do
-                p "テキスト"
-                p @json[:event][:text]
-                p "id"
-                p var["id"]
                 if @json[:event][:text].include?(var["id"])
                   p "下が名前"
                   p var["profile"]["real_name"]
+                  name=var["profile"]["real_name"]
                 end
                end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
@@ -218,7 +215,7 @@ module Body
                   "type": "button",
                     "text": {
                         "type": "plain_text",
-                        "text": "<@#{@json[:event][:user]}>さんのページへ！",
+                        "text": "#{name}さんのページへ！",
                         "emoji": false
                     },
                   "url": "https://mates-profile-app.herokuapp.com/"
@@ -252,11 +249,11 @@ module Body
                   "type": "button",
                     "text": {
                         "type": "plain_text",
-                        "text": "Go to the page",
+                        "text": "#{name}さんのページへ！",
                         "emoji": false
                     },
                     "url": "https://mates-profile-app.herokuapp.com/",
-                    "value": "#{@json[:event][:text]}"
+                    "value": "#{name}"
                 }
               ]
             }
