@@ -78,6 +78,7 @@ module Body
             if @json["message"]["text"].include?(var["profile"]["real_name"])
               p "下がアクションの名前"
               p var["id"]
+              break
             end
            end
             p @json["user"]
@@ -86,10 +87,11 @@ module Body
              #   req.headers['Content-Type'] = 'application/html'
                 req.body = {
                   :is_index => true,
-                  :member_slack_id => var["id"],
+                  :member_slack_id =>var["id"],
                   :workspace_id => @json["team"]["id"],
                   :slack_user_id => @json["user"]["id"]
                 }
+                p var["id"]
                 p req.body
               end
             
