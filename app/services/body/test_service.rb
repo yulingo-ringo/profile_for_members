@@ -16,7 +16,7 @@ module Body
         builder.use Faraday::Adapter::NetHttp    
       end
       p "この間がjson"
-      #p @json
+      p @json
       p "この間がjson"
       p "<@#{@json[:event][:user]}>"
       p ENV["SLACK_BOT_USER_TOKEN"]
