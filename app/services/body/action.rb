@@ -16,7 +16,7 @@ module Body
           end
 
           p @json
-          if @json["message"]["blocks"][0]["elements"][0]["text"]["text"] == "Go+to+your+Page"
+ #         if @json["message"]["blocks"][0]["elements"][0]["text"]["text"] == "Go+to+your+Page"
             p @json["user"]
             response = natsuo.get do |req|  
                 req.url '/login'
@@ -88,7 +88,7 @@ module Body
             #     :view => view
             #     }
             # conn.post '/api/views.open',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
-          end    
+   #       end    
       end
   end   
 end
