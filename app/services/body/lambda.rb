@@ -23,7 +23,7 @@ module Body
         req.params[:types] = "im"
       end
       hash = JSON.parse(response.body)
-      p hash
+      p hash[:id]
       p "ハッシュかされてる？"
 
     end
