@@ -13,7 +13,7 @@ module Body
         req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
         req.params[:types] = "im"
       end
-      hash = JSON.parse(response)
+      hash = JSON.parse(request.body.read)
       p hash
       p "ハッシュかされてる？"
 
