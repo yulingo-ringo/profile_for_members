@@ -32,6 +32,10 @@ module Body
                p members
                p "この間メンバー"
                for var in members do
+                p "テキスト"
+                p @json[:event][:text]
+                p "id"
+                p var["id"]
                 if @json[:event][:text].include?(var["id"])
                   p "下が名前"
                   p var["peofile"]["real_name"]
