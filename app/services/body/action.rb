@@ -16,7 +16,7 @@ module Body
           end
 
           p @json
- #         if @json["message"]["blocks"][0]["elements"][0]["text"]["text"] == "Go+to+your+Page"
+#         if @json["message"]["blocks"][0]["elements"][0]["text"]["text"] == "Go+to+your+Page"
             p @json["user"]
               body = {
                   :is_index => true,
@@ -24,8 +24,7 @@ module Body
                   :workspace_id => @json["team"]["id"],
                   :slack_user_id => @json["user"]["id"]
                 }
-              end
-            web.get '/login',body.to_json, {"Content-type" => 'application/html'}
+              web.get '/login',body.to_json, {"Content-type" => 'application/html'}
             # view = {
             #     "type": "modal",
             #     "title": {
