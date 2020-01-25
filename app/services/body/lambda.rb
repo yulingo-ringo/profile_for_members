@@ -17,16 +17,16 @@ module Body
       end
       hash = JSON.parse(response.body)
       p hash["channels"]
-      for var in hash["channels"] do
-        p var["id"]
-        body = {
-          :token => ENV['SLACK_BOT_USER_TOKEN'],
-          :channel => "#{var["id"]}",
-          :text  => "あなたに質問があります"
+      # for var in hash["channels"] do
+      #   p var["id"]
+      #   body = {
+      #     :token => ENV['SLACK_BOT_USER_TOKEN'],
+      #     :channel => "#{var["id"]}",
+      #     :text  => "あなたに質問があります"
           
-        }
-        conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-      end
+      #   }
+      #   conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+      # end
       p "ハッシュかされてる？"
 
     end
