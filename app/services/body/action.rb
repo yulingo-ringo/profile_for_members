@@ -20,7 +20,7 @@ module Body
             p @json["user"]
             response = natsuo.get do |req|  
                 req.url '/login'
-                req.headers['Content-Type'] = 'application/html'
+             #   req.headers['Content-Type'] = 'application/html'
                 req.body = {
                   :is_index => true,
                   :member_slack_id => @json["user"],
