@@ -27,6 +27,7 @@ module Body
                   :workspace_id => @json["team"]["id"],
                   :slack_user_id => @json["user"]["id"]
                 }
+                p req.body
               end
             
             # view = {
