@@ -16,7 +16,7 @@ module Body
         builder.use Faraday::Adapter::NetHttp    
       end
 
-      p @json[:event][:text]
+      p @json
       p "<@#{@json[:event][:user]}>"
       p ENV["SLACK_BOT_USER_TOKEN"]
       if @json[:event][:subtype] != "bot_message"

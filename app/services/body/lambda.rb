@@ -16,7 +16,7 @@ module Body
         req.params[:types] = "im"
       end
       hash = JSON.parse(response.body)
-      p hash["channels"]
+      #p hash["channels"]
       # for var in hash["channels"] do
       #   p var["id"]
       #   body = {
