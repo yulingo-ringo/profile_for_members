@@ -38,7 +38,7 @@ module Body
                 p var["id"]
                 if @json[:event][:text].include?(var["id"])
                   p "下が名前"
-                  p var["peofile"]["real_name"]
+                  p var["profile"]["real_name"]
                 end
                end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
