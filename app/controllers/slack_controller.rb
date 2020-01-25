@@ -34,7 +34,7 @@ class SlackController < ApplicationController
     end
 
     def lambda
-        Body::Lambda.question
+        Body::Lambda.new.question
     end
 
 end

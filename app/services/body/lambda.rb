@@ -1,5 +1,7 @@
 module Body
   class Lambda
+    def initialize
+    end
     def question
       conn = Faraday::Connection.new(:url => 'https://slack.com') do |builder|
         builder.use Faraday::Request::UrlEncoded  
