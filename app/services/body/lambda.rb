@@ -13,7 +13,7 @@ module Body
         req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
         req.params[:types] = "im"
       end
-      p response
+      p response[:id]
 
       body = {
         :token => ENV['SLACK_BOT_USER_TOKEN'],
