@@ -20,7 +20,9 @@ module Body
       p "この間がjson"
       p "<@#{@json[:event][:user]}>"
       p ENV["SLACK_BOT_USER_TOKEN"]
-      if @json[:event][:subtype] != "bot_message"
+      if @json[:event][:type]=="user_change"
+        p "hi"
+      elsif @json[:event][:subtype] != "bot_message"
         if @json[:event][:text].include?("<@")
             response = conn.get do |req|  
                 req.url '/api/users.list'
