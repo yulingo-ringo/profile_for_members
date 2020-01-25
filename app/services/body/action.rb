@@ -72,6 +72,9 @@ module Body
      #      p members
            p "この間メンバー"
            for var in members do
+            p "テキストとその下は名前！"
+            p @json["message"]["text"]
+            p var["profile"]["real_name"]
             if @json["message"]["text"].include?(var["profile"]["real_name"])
               p "下がアクションの名前"
               p var["id"]
