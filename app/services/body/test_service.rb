@@ -201,7 +201,7 @@ module Body
                         "text": "Go to your Page",
                         "emoji": false
                     },
-                  "url": "https://www.tokyodisneyresort.jp/tdl/"
+                  "url": "https://mates-profile-app.herokuapp.com/"
                 }
               ]
             }
@@ -235,7 +235,7 @@ module Body
                         "text": "Go to the page",
                         "emoji": false
                     },
-                    "url": "https://www.tokyodisneyresort.jp/tds/",
+                    "url": "https://mates-profile-app.herokuapp.com/",
                     "value": "#{@json[:event][:text]}"
                 }
               ]

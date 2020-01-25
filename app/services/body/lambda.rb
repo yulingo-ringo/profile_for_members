@@ -25,7 +25,7 @@ module Body
       hash = JSON.parse(response.body)
       p hash["channels"]
       for var in hash["channels"] do
-        p var
+        p var["id"]
       end
       p "ハッシュかされてる？"
 
