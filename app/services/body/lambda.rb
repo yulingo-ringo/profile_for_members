@@ -13,7 +13,9 @@ module Body
         req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
         req.params[:types] = "im"
       end
-      p response[:id]
+      hash = JSON.parse(response)
+      p hash
+      p "ハッシュかされてる？"
 
       body = {
         :token => ENV['SLACK_BOT_USER_TOKEN'],
