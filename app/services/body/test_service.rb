@@ -39,9 +39,9 @@ module Body
                 end
                end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
-            body=bodies(1)
+            body=bodies(1,name)
           else 
-            body=bodies(2)
+            body=bodies(2,name)
           end
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         elsif @json[:event][:text].include?("info") || @json[:event][:text].include?("help")
@@ -51,7 +51,7 @@ module Body
               #end
               # info = JSON.parse(response&.body)
               # members=info["members"]
-              body = bodies(3)
+              body = bodies(3,name)
               conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
 
               # members.each do |member|
@@ -96,7 +96,7 @@ module Body
               :slack_user_id => @json[:event][:user]
             }
           end
-          body=bodies(4)
+          body=bodies(4,name)
           conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
           
         elsif @json[:event][:text]=="button1"
@@ -117,7 +117,7 @@ module Body
               }
           ]
           
-            body = bodies(3)
+            body = bodies(3,name)
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
           elsif @json[:event][:text]=="button2"
             block_kit_3=[
@@ -155,21 +155,21 @@ module Body
         end
       end
     end
-    def bodies(number)
+    def bodies(number,name)
       case number
       when 1 then
         body = {
           :token => ENV['SLACK_BOT_USER_TOKEN'],
           :channel => @json[:event][:channel],
           :text  => "あなたのURLはこちらです！" ,
-          :blocks => blocks(1)
+          :blocks => blocks(1,name)
         }
       when 2 then
         body = {
           :token => ENV['SLACK_BOT_USER_TOKEN'],
           :channel => @json[:event][:channel],
           :text  => "#{@json[:event][:text]}さんのURLはこちらです",
-          :blocks => blocks(2)
+          :blocks => blocks(2,name)
         }
       when 3 then
         body = {
@@ -187,7 +187,7 @@ module Body
         end  
       return body   
     end
-    def blocks(number)
+    def blocks(number,name)
       case number
       when 1 then
         block=[
