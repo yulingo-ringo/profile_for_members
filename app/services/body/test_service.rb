@@ -16,7 +16,7 @@ module Body
         builder.use Faraday::Adapter::NetHttp    
       end
       p "この間がjson"
-      p @json
+      #p @json
       p "この間がjson"
       p "<@#{@json[:event][:user]}>"
       p ENV["SLACK_BOT_USER_TOKEN"]
@@ -29,7 +29,7 @@ module Body
                info = JSON.parse(response&.body)
                members=info["members"]
                p "この間がメンバー"
-               p members
+             #  p members
                p "この間メンバー"
                for var in members do
                 if @json[:event][:text].include?(var["id"])

@@ -69,11 +69,11 @@ module Body
            info = JSON.parse(response&.body)
            members=info["members"]
            p "この間がメンバー"
-           p members
+     #      p members
            p "この間メンバー"
            for var in members do
             if @json["message"]["text"].include?(var["profile"]["real_name"])
-              p "下が名前"
+              p "下がアクションの名前"
               p var["id"]
             end
            end
