@@ -199,7 +199,7 @@ module Body
                   "type": "button",
                     "text": {
                         "type": "plain_text",
-                        "text": "Go to your Page",
+                        "text": "<@#{@json[:event][:user]}>さんのページへ！",
                         "emoji": false
                     },
                   "url": "https://mates-profile-app.herokuapp.com/"
