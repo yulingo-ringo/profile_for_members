@@ -31,6 +31,10 @@ module Body
                p "この間がメンバー"
                p members
                p "この間メンバー"
+               for var in members do
+                if @json[:event][:text].include?(var["id"])
+                  p var["id"]
+               end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
             body=bodies(1)
           else 
