@@ -49,7 +49,7 @@ module Body
       elsif @json[:event][:type]=="app_requested"
         p "アプリがインストールされました！"
       elsif @json[:event][:subtype] != "bot_message"
-        if @json[:event][:text].include?("<@")
+          if @json[:event][:text].include?("<@")
             response = conn.get do |req|  
                 req.url '/api/users.list'
                 req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
