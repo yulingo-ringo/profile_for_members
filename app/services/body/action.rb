@@ -115,7 +115,7 @@ module Body
                  :view => view
                  }
              conn.post '/api/views.open',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
-          end    
+              
       end
   end   
 end
