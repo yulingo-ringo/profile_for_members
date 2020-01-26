@@ -72,6 +72,7 @@ module Body
               req.url "/api/v1/users"
               req.headers[:workspace_id]=@json["team_id"]
             end
+            p @json["team_id"]
             p "ユーザーのリストある？？"
             p response_self
             p "これの上"
