@@ -64,7 +64,7 @@ module Body
                   p "下が名前"
                   p var["profile"]["real_name"]
                   name=var["profile"]["real_name"]
-                  image = var["profile"]["image_24"]
+                  image = var["profile"]["image_512"]
                 end
                end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
@@ -116,7 +116,47 @@ module Body
             }
            
           else 
-            body=bodies(2,name)
+            block2=[
+              {
+                "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "#{@json[:event][:text]}さんのプロフィールをみてみよう！"
+                  }
+              },
+              {
+                "type": "image",
+                "title": {
+                  "type": "plain_text",
+                  "text": "プロフィール画像"
+                },
+                "block_id": "image4",
+                "image_url": image,
+                "alt_text": "下のボタンをクリックしてください。"
+              },
+              {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": "#{name}さんのページへ！",
+                            "emoji": false
+                        },
+                        "url": "https://mates-profile-app.herokuapp.com/",
+                        "value": "#{name}"
+                    }
+                  ]
+                }
+              ]
+
+            body = {
+              :token => ENV['SLACK_BOT_USER_TOKEN'],
+              :channel => @json[:event][:channel],
+              :text  => "#{name}さんのURLはこちらです",
+              :blocks => block2
+            }
           end
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         elsif @json[:event][:text].include?("info") || @json[:event][:text].include?("help")
