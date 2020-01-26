@@ -75,7 +75,7 @@ module Body
               req.headers[:workspace_id]=@json["team_id"]
             end
             p "ユーザーのリストある？？"
-            p response_self
+            p response_self.body
             block1 =[
               {
                 "type": "section",
