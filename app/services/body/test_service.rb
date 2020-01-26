@@ -64,6 +64,7 @@ module Body
                   p "下が名前"
                   p var["profile"]["real_name"]
                   name=var["profile"]["real_name"]
+                  image = var["profile"]["image_24"]
                 end
                end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
@@ -88,7 +89,7 @@ module Body
                   "text": "プロフィール画像"
                 },
                 "block_id": "image4",
-                "image_url": "https://profile-for-member-delite-quickly.s3-ap-northeast-1.amazonaws.com/myogp.png",
+                "image_url": image,
                 "alt_text": "下のボタンをクリックしてください"
               },
               {
