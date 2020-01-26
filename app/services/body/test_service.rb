@@ -71,7 +71,7 @@ module Body
             p @json["team_id"]
             response_self=natsuo.get do |req|
               req.url "/api/v1/users"
-              req.headers[:workspace_id]=@json["team"]["id"]
+              req.headers[:workspace_id]=@json["team_id"]
             end
             body = {
               :token => ENV['SLACK_BOT_USER_TOKEN'],
