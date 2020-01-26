@@ -73,13 +73,7 @@ module Body
               req.url "/api/v1/users"
               req.headers[:workspace_id]=@json["team_id"]
             end
-            body = {
-              :token => ENV['SLACK_BOT_USER_TOKEN'],
-              :channel => @json[:event][:channel],
-              :text  => "#{name}さんのURLはこちらです！" ,
-              :blocks => block1
-            }
-            block1=[
+            block1 =[
               {
                 "type": "section",
                   "text": {
@@ -112,6 +106,14 @@ module Body
                   ]
                 }
               ]
+
+            body = {
+              :token => ENV['SLACK_BOT_USER_TOKEN'],
+              :channel => @json[:event][:channel],
+              :text  => "#{name}さんのURLはこちらです！",
+              :blocks => block1
+            }
+           
           else 
             body=bodies(2,name)
           end

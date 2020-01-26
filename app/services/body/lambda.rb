@@ -21,9 +21,9 @@ module Body
         req.params[:types] = "im"
       end
 
-      question = web.get do |q|
-        q.url '/api/v1/questions/default'
-        q.headers[:is_from_slack]=true
+      question = web.get do |req|
+        req.url '/api/v1/questions/default'
+        req.headers[:is_from_slack]=true
       end
       hashed_question = JSON.parse(question)
 
