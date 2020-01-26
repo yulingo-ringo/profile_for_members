@@ -74,6 +74,8 @@ module Body
               req.url "/api/v1/users"
               req.headers[:workspace_id]=@json["team_id"]
             end
+            p "ユーザーのリストある？？"
+            p response_self
             block1 =[
               {
                 "type": "section",
