@@ -23,7 +23,7 @@ module Body
 
       question = natsuo.get do |req|
         req.url '/api/v1/questions/default'
-        req.headers[:is_from_slack]=true
+        req.headers[:is_from_slack]= "true"
       end
       hashed_question = JSON.parse(question)
 
@@ -31,7 +31,7 @@ module Body
         :content => hashed_question[:content]
       }
 
-      conn.post '/api/chat.postMessage',body.to_json, {"workspace_id" => '???',"slack_user_id"=>"???"}
+      natsuo.post '/api/chat.postMessage',body.to_json, {"workspace_id" => '???',"slack_user_id"=>"???"}
 
       hash = JSON.parse(response.body)
       #p hash["channels"]
