@@ -46,8 +46,6 @@ module Body
             natsuo.post '/api/v1/users',body.to_json, {"Content-type" => 'application/json'}
           end
         end
-      elsif @json[:event][:type]=="app_requested"
-        p "アプリがインストールされました！"
       elsif @json[:event][:subtype] != "bot_message"
           if @json[:event][:text].include?("<@")
             response = conn.get do |req|  
@@ -237,7 +235,7 @@ module Body
           
             body = bodies(3,name)
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
-          elsif @json[:event][:text]=="button2"
+          elsif @json[:event][:text]=="question"
             block_kit_3=[
                 {
                     "type": "actions",
