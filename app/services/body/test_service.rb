@@ -68,7 +68,7 @@ module Body
                end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
             p "ワークスペースid"
-            p @json["team"]["id"]
+            p @json["team_id"]
             response_self=natsuo.get do |req|
               req.url "/api/v1/users"
               req.headers[:workspace_id]=@json["team"]["id"]
