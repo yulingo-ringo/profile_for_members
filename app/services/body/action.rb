@@ -17,26 +17,7 @@ module Body
           p "これがアクションのjson"
           p @json
           p "ここまで"
-          response = conn.get do |req|  
-            req.url '/api/users.list'
-            req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
-          end
-           info = JSON.parse(response&.body)
-           members=info["members"]
-           p "この間がメンバー"
-     #      p members
-           p "この間メンバー"
-           for var in members do
-            p "テキストとその下は名前！"
-            p @json["message"]["text"]
-            p var["profile"]["real_name"]
-            if @json["message"]["text"].include?(var["profile"]["real_name"])
-              p "下がアクションの名前"
-              p var["id"]
-              break
-            end
-           end
-
+          
            if @json["type"]=="block_actions"
             view = {
               "type": "modal",
@@ -101,6 +82,27 @@ module Body
             conn.post '/api/views.open',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
            
            else
+            response = conn.get do |req|  
+              req.url '/api/users.list'
+              req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+            end
+             info = JSON.parse(response&.body)
+             members=info["members"]
+             p "この間がメンバー"
+       #      p members
+             p "この間メンバー"
+             for var in members do
+              p "テキストとその下は名前！"
+              p @json["message"]["text"]
+              p var["profile"]["real_name"]
+              if @json["message"]["text"].include?(var["profile"]["real_name"])
+                p "下がアクションの名前"
+                p var["id"]
+                break
+              end
+             end
+  
+
             @json["user"]
             response = natsuo.get do |req|  
                 req.url '/login'

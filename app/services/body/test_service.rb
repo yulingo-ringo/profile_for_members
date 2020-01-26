@@ -244,7 +244,7 @@ module Body
                         "type": "button",
                           "text": {
                               "type": "plain_text",
-                              "text": "Fill in the Blank",
+                              "text": "あなたに質問が届いています",
                               "emoji": false
                           }
                       }
