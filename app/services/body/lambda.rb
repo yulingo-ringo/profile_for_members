@@ -21,17 +21,17 @@ module Body
         req.params[:types] = "im"
       end
 
-      question = web.get do |req|
-        req.url '/api/v1/questions/default'
-        req.headers[:is_from_slack]=true
-      end
-      hashed_question = JSON.parse(question)
+      # question = web.get do |req|
+      #   req.url '/api/v1/questions/default'
+      #   req.headers[:is_from_slack]=true
+      # end
+      # hashed_question = JSON.parse(question)
 
-      body={
-        :content => hashed_question[:content]
-      }
+      # body={
+      #   :content => hashed_question[:content]
+      # }
 
-      conn.post '/api/chat.postMessage',body.to_json, {"workspace_id" => '???',"slack_user_id"=>"???"}
+      # conn.post '/api/chat.postMessage',body.to_json, {"workspace_id" => '???',"slack_user_id"=>"???"}
 
       hash = JSON.parse(response.body)
       #p hash["channels"]
