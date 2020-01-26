@@ -67,7 +67,51 @@ module Body
                 end
                end
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
-            body=bodies(1,name)
+            p "ワークスペースid"
+            p @json["team"]["id"]
+            response_self=natsuo.get do |req|
+              req.url "/api/v1/users"
+              req.headers[:workspace_id]=@json["team"]["id"]
+            end
+            body = {
+              :token => ENV['SLACK_BOT_USER_TOKEN'],
+              :channel => @json[:event][:channel],
+              :text  => "#{name}さんのURLはこちらです！" ,
+              :blocks => block1
+            }
+            block1=[
+              {
+                "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "あなたのページに行きましょう！"
+                  }
+              },
+              {
+                "type": "image",
+                "title": {
+                  "type": "plain_text",
+                  "text": "プロフィール画像"
+                },
+                "block_id": "image4",
+                "image_url": "https://profile-for-member-delite-quickly.s3-ap-northeast-1.amazonaws.com/myogp.png",
+                "alt_text": "下のボタンをクリックしてください"
+              },
+              {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": "#{name}さんのページへ！",
+                            "emoji": false
+                        },
+                      "url": "https://mates-profile-app.herokuapp.com/"
+                    }
+                  ]
+                }
+              ]
           else 
             body=bodies(2,name)
           end

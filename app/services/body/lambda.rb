@@ -23,8 +23,15 @@ module Body
 
       question = web.get do |q|
         q.url '/api/v1/questions/default'
-        q.params[:is_from_slack] = true
+        q.headers[:is_from_slack]=true
       end
+      hashed_question = JSON.parse(question)
+
+      body={
+        :content => hashed_question[:content]
+      }
+
+      conn.post '/api/chat.postMessage',body.to_json, {"workspace_id" => '???',"slack_user_id"=>"???"}
 
       hash = JSON.parse(response.body)
       #p hash["channels"]
