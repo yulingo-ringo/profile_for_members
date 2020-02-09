@@ -65,11 +65,12 @@ module Body
                   image = var["profile"]["image_512"]
                 end
                end
+
           if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
             p "ワークスペースid"
             p @json["team_id"]
             response_self=natsuo.get do |req|
-              req.url "/api/v1/users"
+              req.url "/#{var["id"]}"
               req.headers[:workspace_id]=@json["team_id"]
             end
             p @json["team_id"]
