@@ -61,7 +61,7 @@ module Body
                   p var["profile"]["real_name"]
                   name=var["profile"]["real_name"]
                   image = var["profile"]["image_512"]
-                  id=var["profile"]["id"]
+                  id=var["id"]
                 end
                end
 
@@ -80,8 +80,14 @@ module Body
             p knowns[2]
             p "ハッシュ化されてたら成功"
             for var in knowns do
-              p var["display_name"]
+              if id==var["slack_user_id"]
+                ok=1
+              break
+              ok=0
             end
+            p "ok"
+            p ok
+            p "ok"
 
             block1 =[
               {
