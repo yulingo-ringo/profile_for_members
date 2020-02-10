@@ -83,6 +83,7 @@ module Body
               if id==var["slack_user_id"]
                 ok=1
               break
+              end
               ok=0
             end
             p "ok"
