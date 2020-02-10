@@ -73,8 +73,11 @@ module Body
             end
             p @json["team_id"]
             p "ユーザーのリストある？？"
-            p response_self.body[2]
+            p response_self.body
             p "これの上"
+            knowns= JSON.parse(response_self.body)
+            p knowns
+            p "ハッシュ化されてたら成功"
             block1 =[
               {
                 "type": "section",
