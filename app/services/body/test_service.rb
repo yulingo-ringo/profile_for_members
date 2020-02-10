@@ -76,7 +76,7 @@ module Body
             p response_self.body
             p "これの上"
             knowns= JSON.parse(response_self.body)
-            p knowns[:slack_user_id]
+            p knowns["slack_user_id"]
             p "ハッシュ化されてたら成功"
             block1 =[
               {
