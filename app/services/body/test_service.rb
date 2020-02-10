@@ -73,7 +73,7 @@ module Body
             end
             p @json["team_id"]
             p "ユーザーのリストある？？"
-            p response_self.body
+            p response_self.body[2]
             p "これの上"
             block1 =[
               {
