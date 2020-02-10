@@ -68,7 +68,7 @@ module Body
             p "ワークスペースid"
             p @json["team_id"]
             response_self=natsuo.get do |req|
-              req.url "/#{var["id"]}"
+              req.url "/api/v1/users"
               req.headers[:workspace_id]=@json["team_id"]
             end
             p @json["team_id"]
