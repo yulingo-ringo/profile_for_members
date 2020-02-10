@@ -53,7 +53,7 @@ module Body
                info = JSON.parse(response&.body)
                members=info["members"]
                p "この間がメンバー"
-             #  p members
+               p members
                p "この間メンバー"
                for var in members do
                 if @json[:event][:text].include?(var["id"])
@@ -61,6 +61,7 @@ module Body
                   p var["profile"]["real_name"]
                   name=var["profile"]["real_name"]
                   image = var["profile"]["image_512"]
+                  id=var["profile"]["id"]
                 end
                end
 
@@ -78,6 +79,10 @@ module Body
             knowns= JSON.parse(response_self.body)
             p knowns[2]
             p "ハッシュ化されてたら成功"
+            for var in knowns do
+              p var["display_name"]
+            end
+
             block1 =[
               {
                 "type": "section",
