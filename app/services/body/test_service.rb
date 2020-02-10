@@ -88,7 +88,7 @@ module Body
               ok=0
             end
             if ok==1
-              response_self=natsuo.get do |req|
+              response_self=natsuo.put do |req|
                 req.url "/api/v1/users/#{id}"
                 req.headers[:slack_user_id]=@json["event"]["user"]
                 req.body=var
