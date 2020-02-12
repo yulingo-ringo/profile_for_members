@@ -83,7 +83,7 @@ module Body
             for var in knowns do
               if id==var["slack_user_id"]
                 p "ユーザーidが欲しい" 
-                p var
+                p var["_id"]
                 ok=1
               break
               end
