@@ -83,18 +83,19 @@ module Body
             for var in knowns do
               if id==var["slack_user_id"]
                 p "ユーザーidが欲しい" 
-                p var["_id"]
+                webid=var["_id"]
+                p webid
                 ok=1
               break
               end
               ok=0
             end
             if ok==1
-              # response_self=natsuo.put do |req|
-              #   req.url "/api/v1/users/#{id}"
-              #   req.headers[:slack_user_id]=@json["event"]["user"]
-              #   req.body=var
-              # end
+               response_self=natsuo.put do |req|
+                 req.url "/api/v1/users/#{webid}"
+                 req.headers[:slack_user_id]=@json["event"]["user"]
+                 req.body=var
+               end
             else
             end
             p "ok"
