@@ -56,7 +56,7 @@ module Body
       ]
       body = {
         :token => ENV['SLACK_BOT_USER_TOKEN'],
-        :channel => @json[:event][:channel],
+        :channel => "#general",
         :text  => "あなたに質問が届いています",
         :blocks => block
       }
