@@ -50,7 +50,7 @@ module Body
                       "text": "今すぐ答えよう！",
                       "emoji": false
                   },
-                "value": hashed_question[:content]
+                "value": "#{hashed_question[:content]}""
               }
             ]
         }
