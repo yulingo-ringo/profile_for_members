@@ -17,10 +17,10 @@ module Body
           p "これがアクションのjson"
           p @json
           p "次はjsonのアクション"
-          p @json["actions"][0]["value"]
           p "ここまで"
           
            if @json["type"]=="block_actions"
+            p @json["actions"][0]["value"]
                 if @json["actions"][0]["value"]=="link"
                     response = conn.get do |req|  
                         req.url '/api/users.list'
