@@ -39,12 +39,26 @@ module Body
       natsuo.post '/api/v1/questions',body.to_json, {"workspace_id" => 'TPUL203HT',"slack_user_id"=>"UPH64QN9Z"}
 
       hash = JSON.parse(response.body)
+      block=[
+        {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "button",
+                  "text": {
+                      "type": "plain_text",
+                      "text": "今すぐ答えよう！",
+                      "emoji": false
+                  }
+              }
+            ]
+        }
+      ]
       body = {
         :token => ENV['SLACK_BOT_USER_TOKEN'],
-   #     :channel => "#{var["id"]}", 全員に対して個人DMしたくなったらこれを起動しましょう
-        :channel => "#general",
-        :text  => "あなたに質問があります"
-       
+        :channel => @json[:event][:channel],
+        :text  => "あなたに質問が届いています"
+        :blocks => block
       }
       conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
     
