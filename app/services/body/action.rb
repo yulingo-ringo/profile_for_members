@@ -45,7 +45,7 @@ module Body
                 req.headers["is-index"] = "false"
                 req.headers["member-slack-id"] = var["id"]
                 req.headers["workspace-id"] = @json["team"]["id"]
-                req.headers["slack_user-id"] = @json["user"]["id"]
+                req.headers["slack-user-id"] = @json["user"]["id"]
                 p var["id"]
                 p req.body
               end
