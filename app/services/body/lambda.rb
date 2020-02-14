@@ -30,6 +30,7 @@ module Body
        p question
        p "質問ありますか"
        hashed_question = JSON.parse(question&.body)
+       p hashed_question
 
        body={
          :content => hashed_question[:content]
@@ -47,7 +48,7 @@ module Body
       }
       conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
     
-      p hash["channels"]
+       hash["channels"]
        for var in hash["channels"] do
          p var["id"]
       #    body = {
