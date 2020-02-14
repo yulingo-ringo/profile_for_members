@@ -97,6 +97,20 @@ module Body
                  req.body=var
                end
             else
+              response = conn.get do |req|  
+                req.url '/api/team.info'
+                req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+              end
+              team = JSON.parse(response&.body)
+              body ={
+                :display_name => name,
+                :avatar => image,
+                :slack_user_id => id,
+                :workspace_id => @json["team_id"],
+                :workspace_avatar=> team["team"]["icon"]["image_34"]
+              }
+              p body
+              natsuo.post '/api/v1/users',body.to_json, {"Content-type" => 'application/json'}
             end
             p "ok"
             p ok

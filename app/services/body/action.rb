@@ -19,6 +19,17 @@ module Body
           p "ここまで"
           
            if @json["type"]=="block_actions"
+            p @json["user"]
+            p "ユーザー確認"
+            response = natsuo.get do |req|  
+                req.url '/login'               
+                req.headers[:is_index] = "false"
+                req.headers[:member_slack_id] = var["id"]
+                req.headers[:workspace_id] = @json["team"]["id"]
+                req.headers[:slack_user_id] = @json["user"]["id"]
+                p var["id"]
+                p req.body
+              end
             view = {
               "type": "modal",
               "title": {
@@ -95,14 +106,7 @@ module Body
 
             @json["user"]
             response = natsuo.get do |req|  
-                req.url '/login'
-             #   req.headers['Content-Type'] = 'application/html'
-                req.body = {
-                  :is_index => false,
-                  :member_slack_id =>var["id"],
-                  :workspace_id => @json["team"]["id"],
-                  :slack_user_id => @json["user"]["id"]
-                }
+                req.url '/login'               
                 req.headers[:is_index] = "false"
                 req.headers[:member_slack_id] = var["id"]
                 req.headers[:workspace_id] = @json["team"]["id"]
