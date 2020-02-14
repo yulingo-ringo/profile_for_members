@@ -25,7 +25,9 @@ module Body
          req.url '/api/v1/questions/default'
          req.headers[:is_from_slack]= "true"
        end
+       p "質問ありますか"
        p question
+       p "質問ありますか"
        hashed_question = JSON.parse(question&.body)
 
        body={
