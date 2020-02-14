@@ -42,10 +42,10 @@ module Body
         #     p "ユーザー確認"
             response = natsuo.get do |req|  
                 req.url '/login'               
-                req.headers["is-index"] = "false"
-                req.headers["member-slack-id"] = @json["user"]["id"]
-                req.headers["workspace-id"] = @json["team"]["id"]
-                req.headers["slack-user-id"] = @json["user"]["id"]
+                req.headers["is_index"] = "false"
+                req.headers["member_slack_id"] = @json["user"]["id"]
+                req.headers["workspace_id"] = @json["team"]["id"]
+                req.headers["slack_user_id"] = @json["user"]["id"]
               end
             view = {
               "type": "modal",
