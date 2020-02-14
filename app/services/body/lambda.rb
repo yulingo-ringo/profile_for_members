@@ -36,7 +36,7 @@ module Body
          :content => hashed_question[:content]
        }
 
-      natsuo.post '/api/v1/questions/default',body.to_json, {"workspace_id" => 'TPUL203HT',"slack_user_id"=>"UPH64QN9Z"}
+      natsuo.post '/api/v1/questions',body.to_json, {"workspace_id" => 'TPUL203HT',"slack_user_id"=>"UPH64QN9Z"}
 
       hash = JSON.parse(response.body)
       body = {
