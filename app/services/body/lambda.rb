@@ -57,7 +57,7 @@ module Body
       body = {
         :token => ENV['SLACK_BOT_USER_TOKEN'],
         :channel => @json[:event][:channel],
-        :text  => "あなたに質問が届いています"
+        :text  => "あなたに質問が届いています",
         :blocks => block
       }
       conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
