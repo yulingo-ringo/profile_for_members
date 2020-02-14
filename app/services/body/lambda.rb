@@ -30,7 +30,7 @@ module Body
        p question
        p "質問ありますか"
        hashed_question = JSON.parse(question&.body)
-       p hashed_question
+       p hashed_question["content"]
 
        body={
          :content => hashed_question[:content]
