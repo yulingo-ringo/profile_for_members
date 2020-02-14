@@ -49,7 +49,7 @@ module Body
                       "type": "plain_text",
                       "text": "今すぐ答えよう！",
                       "emoji": false
-                  }
+                  },
                 "value": hashed_question[:content]
               }
             ]
