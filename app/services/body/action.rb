@@ -19,35 +19,33 @@ module Body
           p "ここまで"
           
            if @json["type"]=="block_actions"
-            response = conn.get do |req|  
-                req.url '/api/users.list'
-                req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
-              end
-               info = JSON.parse(response&.body)
-               members=info["members"]
-               p "この間がメンバー"
-         #      p members
-               p "この間メンバー"
-               for var in members do
-                p "テキストとその下は名前！"
-                p @json["message"]["text"]
-                p var["profile"]["real_name"]
-                if @json["message"]["text"].include?(var["profile"]["real_name"])
-                  p "下がアクションの名前"
-                  p var["id"]
-                  break
-                end
-               end
-            p @json["user"]
-            p "ユーザー確認"
+        #     response = conn.get do |req|  
+        #         req.url '/api/users.list'
+        #         req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+        #       end
+        #        info = JSON.parse(response&.body)
+        #        members=info["members"]
+        #        p "この間がメンバー"
+        #  #      p members
+        #        p "この間メンバー"
+        #        for var in members do
+        #         p "テキストとその下は名前！"
+        #         p @json["message"]["text"]
+        #         p var["profile"]["real_name"]
+        #         if @json["message"]["text"].include?(var["profile"]["real_name"])
+        #           p "下がアクションの名前"
+        #           p var["id"]
+        #           break
+        #         end
+        #        end
+        #     p @json["user"]
+        #     p "ユーザー確認"
             response = natsuo.get do |req|  
                 req.url '/login'               
                 req.headers["is-index"] = "false"
-                req.headers["member-slack-id"] = var["id"]
+                req.headers["member-slack-id"] = @json["user"]["id"]
                 req.headers["workspace-id"] = @json["team"]["id"]
                 req.headers["slack-user-id"] = @json["user"]["id"]
-                p var["id"]
-                p req.body
               end
             view = {
               "type": "modal",
