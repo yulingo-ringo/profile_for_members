@@ -145,6 +145,7 @@ module Body
                             "emoji": false
                         },
                       "url": "https://mates-profile-app.herokuapp.com/login?is_index=false&slack_user_id=#{@json["event"]["user"]}&member_slack_id=#{id}&workspace_id=#{@json["team_id"]}"
+                      "value": "link"
                     }
                   ]
                 }
@@ -187,7 +188,7 @@ module Body
                             "emoji": false
                         },
                         "url": "https://mates-profile-app.herokuapp.com/login?is_index=false&slack_user_id=#{@json["event"]["user"]}&member_slack_id=#{id}&workspace_id=#{@json["team_id"]}",
-                        "value": "#{name}"
+                        "value": "link"
                     }
                   ]
                 }

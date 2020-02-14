@@ -16,6 +16,8 @@ module Body
           end
           p "これがアクションのjson"
           p @json
+          p "次はjsonのアクション"
+          p @json["action"]
           p "ここまで"
           
            if @json["type"]=="block_actions"
@@ -25,9 +27,6 @@ module Body
               end
                info = JSON.parse(response&.body)
                members=info["members"]
-               p "この間がメンバー"
-         #      p members
-               p "この間メンバー"
                for var in members do
                 p "テキストとその下は名前！"
                 p @json["message"]["text"]
@@ -38,15 +37,6 @@ module Body
                   break
                 end
                end
-            p @json["user"]
-            p "ユーザー確認"
-            response = natsuo.get do |req|  
-                req.url '/login'               
-                req.headers["is-index"] = "false"
-                req.headers["member-slack-id"] = var["id"]
-                req.headers["workspace-id"] = @json["team"]["id"]
-                req.headers["slack-user-id"] = @json["user"]["id"]
-              end
             view = {
               "type": "modal",
               "title": {
