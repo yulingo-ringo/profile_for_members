@@ -21,31 +21,32 @@ module Body
         req.params[:types] = "im"
       end
 
-      # question = natsuo.get do |req|
-      #   req.url '/api/v1/questions/default'
-      #   req.headers[:is_from_slack]= "true"
-      # end
-      # p question
-      # hashed_question = JSON.parse(question&.body)
+       question = natsuo.get do |req|
+         req.url '/api/v1/questions/default'
+         req.headers[:is_from_slack]= "true"
+       end
+       p question
+       hashed_question = JSON.parse(question&.body)
 
-      # body={
-      #   :content => hashed_question[:content]
-      # }
+       body={
+         :content => hashed_question[:content]
+       }
 
       # natsuo.post '/api/chat.postMessage',body.to_json, {"workspace_id" => '???',"slack_user_id"=>"???"}
 
       hash = JSON.parse(response.body)
-      #p hash["channels"]
-      # for var in hash["channels"] do
-      #   p var["id"]
-      #   body = {
-      #     :token => ENV['SLACK_BOT_USER_TOKEN'],
-      #     :channel => "#{var["id"]}",
-      #     :text  => "あなたに質問があります"
+      p hash["channels"]
+       for var in hash["channels"] do
+         p var["id"]
+         body = {
+           :token => ENV['SLACK_BOT_USER_TOKEN'],
+      #     :channel => "#{var["id"]}", 全員に対して個人DMしたくなったらこれを起動しましょう
+           :channel => "#general"
+           :text  => "あなたに質問があります"
           
-      #   }
-      #   conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-      # end
+         }
+         conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+       end
       p "ハッシュ化されてる？"
 
     end
