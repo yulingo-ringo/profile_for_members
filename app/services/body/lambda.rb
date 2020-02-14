@@ -47,7 +47,7 @@ module Body
                 "type": "button",
                   "text": {
                       "type": "plain_text",
-                      "text": hashed_question[:content],
+                      "text": "#{hashed_question[:content]}",
                       "emoji": false
                   }
               }
