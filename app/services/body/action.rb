@@ -105,26 +105,18 @@ module Body
              p "この間メンバー"
              for var in members do
               p "テキストとその下は名前！"
-              p @json["message"]["text"]
+              #p @json["message"]["text"]
               p var["profile"]["real_name"]
-              if @json["message"]["text"].include?(var["profile"]["real_name"])
-                p "下がアクションの名前"
-                p var["id"]
-                break
-              end
+            #   if @json["message"]["text"].include?(var["profile"]["real_name"])
+            #     p "下がアクションの名前"
+            #     p var["id"]
+            #     break
+            #   end
              end
   
 
-            @json["user"]
-            response = natsuo.get do |req|  
-                req.url '/login'               
-                req.headers[:is_index] = "false"
-                req.headers[:member_slack_id] = var["id"]
-                req.headers[:workspace_id] = @json["team"]["id"]
-                req.headers[:slack_user_id] = @json["user"]["id"]
-                p var["id"]
-                p req.body
-              end
+            #@json["user"]
+            
             
             end
       end
