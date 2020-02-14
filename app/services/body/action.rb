@@ -17,7 +17,7 @@ module Body
           p "これがアクションのjson"
           p @json
           p "次はjsonのアクション"
-          p @json["action"]
+          p @json["actions"]
           p "ここまで"
           
            if @json["type"]=="block_actions"
