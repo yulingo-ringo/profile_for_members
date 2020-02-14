@@ -20,6 +20,7 @@ module Body
           p "ここまで"
           
            if @json["type"]=="block_actions"
+            p "この子はブロックなのです"
             p @json["actions"][0]["value"]
                 if @json["actions"][0]["value"]=="link"
                     response = conn.get do |req|  
