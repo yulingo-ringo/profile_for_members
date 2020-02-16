@@ -48,10 +48,10 @@ module Body
                 "type": "button",
                   "text": {
                       "type": "plain_text",
-                      "text": "#{content}",
+                      "text": "今すぐ答えよう！",
                       "emoji": false
                   },
-                "value": "#{id}"
+                "value": "#{value}&&&#{id}"
               }
             ]
         }
