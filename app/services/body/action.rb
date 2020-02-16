@@ -97,7 +97,8 @@ module Body
                     end
             elsif @json["type"]=="view_submission"
                 p "valueありますか？"
-                p @json["value"]
+                p @json["view"]["state"]["values"]
+                p @json["view"]["state"]["values"]["n9EX6"]["input1"]["value"]
                 p "valueありますか？"
                 body = {
                     :token => ENV['SLACK_BOT_USER_TOKEN'],#あとでherokuで設定します
