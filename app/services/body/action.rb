@@ -45,6 +45,8 @@ module Body
                     p value
                     valuearray = value.split('+')
                     p valuearray[0]
+                    question = valuearray[0]
+                    id =valuearray[1]
                     view = {
                         "type": "modal",
                         "title": {
@@ -56,9 +58,10 @@ module Body
                             "type": "section",
                             "text": {
                                 "type": "mrkdwn",
-                                "text": "#{value}"
+                                "text": "#{question}"
                             },
                             "block_id": "section1",
+                            "value": "#{id}"
                             },
                             {
                             "type": "input",
