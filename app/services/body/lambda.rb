@@ -66,7 +66,6 @@ module Body
       p "レスポンスある？前"
       p response.body
       getid=JSON.parse(response.body)
-      getid.last
       p getid["_id"]
       p "レスポンスある？後"
       # hash["channels"]
