@@ -21,7 +21,7 @@ module Body
           
            if @json["type"]=="block_actions"
             p "この子はブロックなのです"
-            value=["actions"][0]["value"]
+            value=@json["actions"][0]["value"]
             p @json["actions"][0]["value"]
                 if @json["actions"][0]["value"]=="link"
                     response = conn.get do |req|  
