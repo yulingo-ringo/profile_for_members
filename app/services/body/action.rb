@@ -60,8 +60,7 @@ module Body
                                 "type": "mrkdwn",
                                 "text": "#{viewquestion}"
                             },
-                            "block_id": "section1"
-                            #"value": "#{id}"
+                            "block_id": "#{id}"
                             },
                             {
                             "type": "input",
