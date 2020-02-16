@@ -75,18 +75,18 @@ module Body
       p "コンバセーションリストは下"
       p hash
       # hash["channels"]
-      # for var in hash["channels"] do
-      #   p var["id"]
-      #    body = {
-      #      :token => ENV['SLACK_BOT_USER_TOKEN'],
-      # #     :channel => "#{var["id"]}", 全員に対して個人DMしたくなったらこれを起動しましょう
+       for var in hash["channels"] do
+         p var["id"]
+          body = {
+            :token => ENV['SLACK_BOT_USER_TOKEN'],
+           :channel => "#{var["id"]}", 全員に対して個人DMしたくなったらこれを起動しましょう
       #      :channel => "#general",
-      #      :text  => "あなたに質問があります"
-          
-      #    }
-      #    conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+            :text  => "あなたに質問があります",
+            :blocks => block
+          }
+          conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
        
-      #  end
+        end
 
     end
   end
