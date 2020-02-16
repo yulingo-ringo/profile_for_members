@@ -64,7 +64,7 @@ module Body
       }
       response = conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
       p "レスポンスある？"
-      p response
+      p response.body.read
       p "レスポンスある？"
        hash["channels"]
        for var in hash["channels"] do
