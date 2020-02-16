@@ -102,11 +102,12 @@ module Body
             elsif @json["type"]=="view_submission"
                 p "valueありますか？"
                 p @json["view"]["blocks"][1]["block_id"]
+                id==@json["view"]["blocks"][0]["block_id"]
                 block_id=@json["view"]["blocks"][1]["block_id"]
                 p @json["view"]["state"]["values"]
                 p @json["view"]["state"]["values"][block_id]["input1"]["value"]
                 question  = @json["view"]["blocks"][0]["text"]["text"]
-                answer =@json["view"]["state"]["values"][block_id]["input1"]["value"]
+                answer=@json["view"]["state"]["values"][block_id]["input1"]["value"]
                 p "valueありますか？"
                 body = {
                     :token => ENV['SLACK_BOT_USER_TOKEN'],#あとでherokuで設定します
@@ -119,7 +120,7 @@ module Body
                     :content => question,
                     :answer => answer
                 }
-                natsuo.post "/api/v1/questions/#{block_id}",body.to_json, {"workspace-id"=>@json["view"]["id"],"slack-user-id"=>@json["view"]["team_id"]}
+                natsuo.post "/api/v1/questions/#{id}",body.to_json, {"workspace-id"=>@json["view"]["id"],"slack-user-id"=>@json["view"]["team_id"]}
     
             else
             response = conn.get do |req|  
