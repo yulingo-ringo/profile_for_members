@@ -62,8 +62,10 @@ module Body
         :text  => "あなたに質問が届いています",
         :blocks => block
       }
-      response=conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-    
+      response = conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+      p "レスポンスある？"
+      p response
+      p "レスポンスある？"
        hash["channels"]
        for var in hash["channels"] do
          p var["id"]
