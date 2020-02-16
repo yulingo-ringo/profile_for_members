@@ -96,6 +96,9 @@ module Body
                         conn.post '/api/views.open',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
                     end
             elsif @json["type"]=="view_submission"
+                p "valueありますか？"
+                p @json["value"]
+                p "valueありますか？"
                 body = {
                     :token => ENV['SLACK_BOT_USER_TOKEN'],#あとでherokuで設定します
                     :channel => "general",#こうするとDM内に返信できます
