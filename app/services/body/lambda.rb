@@ -66,11 +66,11 @@ module Body
       p "レスポンスある？"
       p response.body
       getid=JSON.parse(response.body)
-      p getid
+      p getid.last
       p "レスポンスある？"
-       hash["channels"]
-       for var in hash["channels"] do
-         p var["id"]
+      # hash["channels"]
+      # for var in hash["channels"] do
+      #   p var["id"]
       #    body = {
       #      :token => ENV['SLACK_BOT_USER_TOKEN'],
       # #     :channel => "#{var["id"]}", 全員に対して個人DMしたくなったらこれを起動しましょう
