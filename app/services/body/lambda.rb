@@ -76,7 +76,32 @@ module Body
       p hash
       # hash["channels"]
        for var in hash["channels"] do
+        body={
+          :content => content
+        }
+       response=natsuo.post '/api/v1/questions',body.to_json, {"Content-Type"=> "application/json","workspace-id" => 'TPUL203HT',"slack-user-id"=>var["users"]}
+       p "レスポンスある？前"
+       p response.body
+       getid=JSON.parse(response.body)
+       p getid["_id"]
+       id=getid["_id"]
          p var["id"]
+         block=[
+          {
+              "type": "actions",
+              "elements": [
+                {
+                  "type": "button",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "今すぐ答えよう！",
+                        "emoji": false
+                    },
+                  "value": "#{content} #{id}"
+                }
+              ]
+          }
+        ]
           body = {
             :token => ENV['SLACK_BOT_USER_TOKEN'],
            :channel => "#{var["id"]}", 全員に対して個人DMしたくなったらこれを起動しましょう
