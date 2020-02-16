@@ -93,7 +93,15 @@ module Body
                         }
                         conn.post '/api/views.open',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
                     end
-           else
+            elsif @json["type"]=="view_submission"
+                body = {
+                    :token => ENV['SLACK_BOT_USER_TOKEN'],#あとでherokuで設定します
+                    :channel => "general",#こうするとDM内に返信できます
+                    :text  => "回答が送信されました！"
+                    }
+                conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
+    
+            else
             response = conn.get do |req|  
               req.url '/api/users.list'
               req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
