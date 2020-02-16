@@ -25,6 +25,7 @@ module Body
         req.url '/api/v1/questions/default'
         req.headers[:is_from_slack]= "true"
       end
+      
 
        p "質問ありますか"
        p question
@@ -32,13 +33,18 @@ module Body
        hashed_question = JSON.parse(question&.body)
        p hashed_question["content"]
        content = hashed_question["content"]
-       id = hashed_question["_id"]
+       #id = hashed_question["_id"]
        p content
        body={
          :content => content
        }
       response=natsuo.post '/api/v1/questions',body.to_json, {"Content-Type"=> "application/json","workspace-id" => 'TPUL203HT',"slack-user-id"=>"UPH64QN9Z"}
-
+      p "レスポンスある？前"
+      p response.body
+      getid=JSON.parse(response.body)
+      p getid["_id"]
+      id=getid["_id"]
+      p "レスポンスある？後"
       hash = JSON.parse(response.body)
       block=[
         {
@@ -63,11 +69,7 @@ module Body
         :blocks => block
       }
       conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-      p "レスポンスある？前"
-      p response.body
-      getid=JSON.parse(response.body)
-      p getid["_id"]
-      p "レスポンスある？後"
+      
       # hash["channels"]
       # for var in hash["channels"] do
       #   p var["id"]
