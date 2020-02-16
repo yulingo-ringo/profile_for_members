@@ -102,7 +102,7 @@ module Body
             elsif @json["type"]=="view_submission"
                 p "valueありますか？"
                 p @json["view"]["blocks"][1]["block_id"]
-                id==@json["view"]["blocks"][0]["block_id"]
+                id=@json["view"]["blocks"][0]["block_id"]
                 block_id=@json["view"]["blocks"][1]["block_id"]
                 p @json["view"]["state"]["values"]
                 p @json["view"]["state"]["values"][block_id]["input1"]["value"]
