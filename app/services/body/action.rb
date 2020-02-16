@@ -54,7 +54,7 @@ module Body
                             "type": "section",
                             "text": {
                                 "type": "mrkdwn",
-                                "text": "定数"
+                                "text": "#{value}"
                             },
                             "block_id": "section1",
                             },
