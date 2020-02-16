@@ -38,14 +38,7 @@ module Body
          :content => content
        }
       natsuo.post '/api/v1/questions',body.to_json, {"Content-Type"=> "application/json","workspace-id" => 'TPUL203HT',"slack-user-id"=>"UPH64QN9Z"}
-      uri = URI.parse(https://mates-profile-app.herokuapp.com/api/v1/questions)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      req = Net::HTTP::Post.new(uri.request_uri)
-      req["Content-Type"] = "application/json"
-      req.body = payload.to_json
-      res = http.request(req)
-      p res
+
       hash = JSON.parse(response.body)
       block=[
         {
