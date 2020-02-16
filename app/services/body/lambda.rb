@@ -104,7 +104,7 @@ module Body
         ]
           body = {
             :token => ENV['SLACK_BOT_USER_TOKEN'],
-           :channel => "#{var["id"]}", 全員に対して個人DMしたくなったらこれを起動しましょう
+            :channel => "#{var["id"]}", #全員に対して個人DMしたくなったらこれを起動しましょう
       #      :channel => "#general",
             :text  => "あなたに質問があります",
             :blocks => block
