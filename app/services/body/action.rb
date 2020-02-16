@@ -43,6 +43,8 @@ module Body
                     
                 else
                     p value
+                    valuearray = value.split('+')
+                    p valuearray[0]
                     view = {
                         "type": "modal",
                         "title": {
