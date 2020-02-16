@@ -119,7 +119,7 @@ module Body
                     :content => question,
                     :answer => answer
                 }
-                natsuo.post '/api/v1/questions/'
+                natsuo.post "/api/v1/questions/#{block_id}",body.to_json, {"workspace-id"=>@json["view"]["id"],"slack-user-id"=>@json["view"]["team_id"]}
     
             else
             response = conn.get do |req|  
