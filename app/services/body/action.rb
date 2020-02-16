@@ -21,6 +21,7 @@ module Body
           
            if @json["type"]=="block_actions"
             p "この子はブロックなのです"
+            value=["actions"][0]["value"]
             p @json["actions"][0]["value"]
                 if @json["actions"][0]["value"]=="link"
                     response = conn.get do |req|  
@@ -52,7 +53,7 @@ module Body
                             "type": "section",
                             "text": {
                                 "type": "mrkdwn",
-                                "text": "あなたが好きな映画は？"
+                                "text": "#{value}"
                             },
                             "block_id": "section1",
                             },
