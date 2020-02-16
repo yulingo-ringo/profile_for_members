@@ -51,7 +51,7 @@ module Body
                       "text": "今すぐ答えよう！",
                       "emoji": false
                   },
-                "value": "#{value}&&&#{id}"
+                "value": "#{content}&&&#{id}"
               }
             ]
         }
