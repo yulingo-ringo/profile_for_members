@@ -66,7 +66,8 @@ module Body
       p "レスポンスある？"
       p response.body
       getid=JSON.parse(response.body)
-      p getid.last
+      gettheid=getid.last
+      p gettheid["_id"]
       p "レスポンスある？"
       # hash["channels"]
       # for var in hash["channels"] do
