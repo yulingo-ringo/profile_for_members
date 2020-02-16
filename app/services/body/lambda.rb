@@ -65,12 +65,15 @@ module Body
         :blocks => block
       }
       conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+
       response = conn.get do |req|  
         req.url '/api/conversations.list'
         req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
         req.params[:types] = "im"
       end
-
+      hash = JSON.parse(response.body)
+      p "コンバセーションリストは下"
+      p hash
       # hash["channels"]
       # for var in hash["channels"] do
       #   p var["id"]
