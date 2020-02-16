@@ -33,8 +33,9 @@ module Body
        p hashed_question["content"]
        content = hashed_question["content"]
        id = hashed_question["_id"]
+       p content
        body={
-         :content => hashed_question[:content]
+         :content => content
        }
       natsuo.post '/api/v1/questions',body.to_json, {"Content-Type"=> "application/json","workspace-id" => 'TPUL203HT',"slack-user-id"=>"UPH64QN9Z"}
 
