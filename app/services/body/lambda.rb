@@ -63,12 +63,12 @@ module Body
         :blocks => block
       }
       conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-      p "レスポンスある？"
+      p "レスポンスある？前"
       p response.body
       getid=JSON.parse(response.body)
-      gettheid=getid.last
-      p gettheid["_id"]
-      p "レスポンスある？"
+      getid.last
+      p getid["_id"]
+      p "レスポンスある？後"
       # hash["channels"]
       # for var in hash["channels"] do
       #   p var["id"]
