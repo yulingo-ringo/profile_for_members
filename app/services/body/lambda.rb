@@ -32,6 +32,7 @@ module Body
        hashed_question = JSON.parse(question&.body)
        p hashed_question["content"]
        content = hashed_question["content"]
+       id = hashed_question["_id"]
        body={
          :content => hashed_question[:content]
        }
@@ -47,10 +48,10 @@ module Body
                 "type": "button",
                   "text": {
                       "type": "plain_text",
-                      "text": "今すぐ答えよう！",
+                      "text": "#{content}",
                       "emoji": false
                   },
-                "value": "#{content}"
+                "value": "#{id}"
               }
             ]
         }
