@@ -76,10 +76,11 @@ module Body
       p hash
       # hash["channels"]
        for var in hash["channels"] do
+        p var["user"]
         body={
           :content => content
         }
-       response=natsuo.post '/api/v1/questions',body.to_json, {"Content-Type"=> "application/json","workspace-id" => 'TPUL203HT',"slack-user-id"=>var["users"]}
+       response=natsuo.post '/api/v1/questions',body.to_json, {"Content-Type"=> "application/json","workspace-id" => 'TPUL203HT',"slack-user-id"=>var["user"]}
        p "レスポンスある？前"
        p response.body
        getid=JSON.parse(response.body)
