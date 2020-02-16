@@ -37,7 +37,7 @@ module Body
        body={
          :content => content
        }
-      natsuo.post '/api/v1/questions',body.to_json, {"Content-Type"=> "application/json","workspace-id" => 'TPUL203HT',"slack-user-id"=>"UPH64QN9Z"}
+      response=natsuo.post '/api/v1/questions',body.to_json, {"Content-Type"=> "application/json","workspace-id" => 'TPUL203HT',"slack-user-id"=>"UPH64QN9Z"}
 
       hash = JSON.parse(response.body)
       block=[
@@ -62,7 +62,7 @@ module Body
         :text  => "あなたに質問が届いています",
         :blocks => block
       }
-      response = conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+      conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
       p "レスポンスある？"
       p response.body
       getid=JSON.parse(response.body)
