@@ -42,6 +42,7 @@ module Body
                     end
                     
                 else
+                    p value
                     view = {
                         "type": "modal",
                         "title": {
@@ -53,7 +54,7 @@ module Body
                             "type": "section",
                             "text": {
                                 "type": "mrkdwn",
-                                "text": "#{value}"
+                                "text": "定数"
                             },
                             "block_id": "section1",
                             },
