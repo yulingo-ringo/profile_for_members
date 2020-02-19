@@ -65,56 +65,57 @@ module Body
                   member=var
                 end
                end
+               response_self=natsuo.get do |req|
+                req.url "/api/v1/users"
+                req.headers[:workspace_id]=@json["team_id"]
+              end
+              p @json["team_id"]
+              p "ユーザーのリストある？？"
+              p response_self.body
+              p "これの上"
+              knowns= JSON.parse(response_self.body)
+              p knowns[2]
+              p "ハッシュ化されてたら成功"
+              for var in knowns do
+                if id==var["slack_user_id"]
+                  p "ユーザーidが欲しい" 
+                  webid=var["_id"]
+                  p webid
+                  ok=1
+                break
+                end
+                ok=0
+              end
+              if ok==1
+                 response_self=natsuo.put do |req|
+                   req.url "/api/v1/users/#{webid}"
+                   req.headers[:slack_user_id]=@json["event"]["user"]
+                   req.body=var
+                 end
+              else
+                response = conn.get do |req|  
+                  req.url '/api/team.info'
+                  req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+                end
+                team = JSON.parse(response&.body)
+                body ={
+                  :display_name => name,
+                  :avatar => image,
+                  :slack_user_id => id,
+                  :workspace_id => @json["team_id"],
+                  :workspace_avatar=> team["team"]["icon"]["image_34"]
+                }
+                p body
+                natsuo.post '/api/v1/users',body.to_json, {"Content-type" => 'application/json'}
+              end
+              p "ok"
+              p ok
+              p "ok"
 
-          if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
+            if @json[:event][:text].include?("<@#{@json[:event][:user]}>")
             p "ワークスペースid"
             p @json["team_id"]
-            response_self=natsuo.get do |req|
-              req.url "/api/v1/users"
-              req.headers[:workspace_id]=@json["team_id"]
-            end
-            p @json["team_id"]
-            p "ユーザーのリストある？？"
-            p response_self.body
-            p "これの上"
-            knowns= JSON.parse(response_self.body)
-            p knowns[2]
-            p "ハッシュ化されてたら成功"
-            for var in knowns do
-              if id==var["slack_user_id"]
-                p "ユーザーidが欲しい" 
-                webid=var["_id"]
-                p webid
-                ok=1
-              break
-              end
-              ok=0
-            end
-            if ok==1
-               response_self=natsuo.put do |req|
-                 req.url "/api/v1/users/#{webid}"
-                 req.headers[:slack_user_id]=@json["event"]["user"]
-                 req.body=var
-               end
-            else
-              response = conn.get do |req|  
-                req.url '/api/team.info'
-                req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
-              end
-              team = JSON.parse(response&.body)
-              body ={
-                :display_name => name,
-                :avatar => image,
-                :slack_user_id => id,
-                :workspace_id => @json["team_id"],
-                :workspace_avatar=> team["team"]["icon"]["image_34"]
-              }
-              p body
-              natsuo.post '/api/v1/users',body.to_json, {"Content-type" => 'application/json'}
-            end
-            p "ok"
-            p ok
-            p "ok"
+            
 
             block1 =[
               {
@@ -158,7 +159,7 @@ module Body
               :blocks => block1
             }
            
-          else 
+            else 
             block2=[
               {
                 "type": "section",
@@ -200,7 +201,7 @@ module Body
               :text  => "#{name}さんのURLはこちらです",
               :blocks => block2
             }
-          end
+           end
             conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
         elsif @json[:event][:text].include?("info") || @json[:event][:text].include?("help")
               #response = conn.get do |req|  
