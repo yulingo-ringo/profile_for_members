@@ -92,21 +92,24 @@ module Body
                    req.headers["slack_user-id"]=@json["event"]["user"]
                    req.body=var
                  end
-                 p "ボディなくないか？前"
-                 p var
-                 p "ボディなくないか？後"
+                
               else
                 response = conn.get do |req|  
                   req.url '/api/team.info'
                   req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
                 end
                 team = JSON.parse(response&.body)
+                p "チームの情報下"
+                p team
+                p "チームの情報上"
                 body ={
                   :display_name => name,
                   :avatar => image,
                   :slack_user_id => id,
                   :workspace_id => @json["team_id"],
                   :workspace_avatar=> team["team"]["icon"]["image_34"]
+                  # :workspace_name => 
+                  # :workspace_link =>
                 }
                 p body
                 natsuo.post '/api/v1/users',body.to_json, {"Content-type" => 'application/json'}
