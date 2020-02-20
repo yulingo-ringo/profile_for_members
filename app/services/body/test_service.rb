@@ -67,7 +67,7 @@ module Body
                end
                response_self=natsuo.get do |req|
                 req.url "/api/v1/users"
-                req.headers[:workspace_id]=@json["team_id"]
+                req.headers["workspace-id"]=@json["team_id"]
               end
               p @json["team_id"]
               p "ユーザーのリストある？？"
@@ -89,9 +89,12 @@ module Body
               if ok==1
                  response_self=natsuo.put do |req|
                    req.url "/api/v1/users/#{webid}"
-                   req.headers[:slack_user_id]=@json["event"]["user"]
+                   req.headers["slack_user-id"]=@json["event"]["user"]
                    req.body=var
                  end
+                 p "ボディなくないか？前"
+                 p var
+                 p "ボディなくないか？後"
               else
                 response = conn.get do |req|  
                   req.url '/api/team.info'
