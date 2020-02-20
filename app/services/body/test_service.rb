@@ -92,6 +92,14 @@ module Body
                    req.headers["slack_user-id"]=@json["event"]["user"]
                    req.body=var
                  end
+                 response = conn.get do |req|  
+                  req.url '/api/team.info'
+                  req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+                end
+                team = JSON.parse(response&.body)
+                p "チームの情報下"
+                p team
+                p "チームの情報上"
                 
               else
                 response = conn.get do |req|  
