@@ -21,67 +21,31 @@ module Body
         req.url '/api/v1/questions/default'
         req.headers[:is_from_slack]= "true"
       end
-      
-
-       p "質問ありますか"
-       p question
-       p "質問ありますか"
        hashed_question = JSON.parse(question&.body)
-       p hashed_question["content"]
        content = hashed_question["content"]
-       #id = hashed_question["_id"]
-       p content
        body={
          :content => content
        }
       response=natsuo.post '/api/v1/questions',body.to_json, {"Content-Type"=> "application/json","workspace-id" => 'TPUL203HT',"slack-user-id"=>"UPH64QN9Z"}
-      p "レスポンスある？前"
-      p response.body
       getid=JSON.parse(response.body)
-      p getid["_id"]
       id=getid["_id"]
-      p "レスポンスある？後"
       hash = JSON.parse(response.body)
-      block=[
-        {
-          "type": "section",
-            "text": {
-              "type": "mrkdwn",
-              "text": "こんにちは、mates profileです<br>あなたに質問が届いています。"
-            }
-        },
-        {
-            "type": "actions",
-            "elements": [
-              {
-                "type": "button",
-                  "text": {
-                      "type": "plain_text",
-                      "text": "いますぐ答えよう！",
-                      "emoji": false
-                  },
-                "value": "#{content} #{id}"
-              }
-            ]
-        }
-      ]
-      # body = {
-      #   :token => ENV['SLACK_BOT_USER_TOKEN'],
-      #   :channel => "#general",
-      #   :text  => "あなたに質問が届いています",
-      #   :blocks => block
-      # }
-      # conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
-
       response = conn.get do |req|  
         req.url '/api/conversations.list'
         req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
         req.params[:types] = "im"
       end
       hash = JSON.parse(response.body)
-      p "コンバセーションリストは下"
-      p hash
-      # hash["channels"]
+      response_self=natsuo.get do |req|
+        req.url "/api/v1/users"
+        req.headers["workspace-id"]= "TPUL203HT"
+      end
+      knowns= JSON.parse(response_self.body)
+      for member in knowns do
+        p "ナツオの方に誰がいるのかチェック"
+        p member["slack_user_id"]
+        p member["display_name"]
+      end
        for var in hash["channels"] do
         p "それぞれのユーザーでうまく行っているか1"
         p var["user"]

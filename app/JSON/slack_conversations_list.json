@@ -1,0 +1,14 @@
+{"ok":true,
+ "channels":[
+   {
+     "id":"DS226MSQ7(DMのチャンネル名)", 
+     "created":"1577106820", 
+     "is_archived":false, 
+     "is_im":true, 
+     "is_org_shared":false, 
+     "user":"UPYBG1Y1J(user_id)", 
+     "is_user_deleted":false, 
+     "priority":0
+    } 
+    ], 
+  "response_metadata":{"next_cursor":""}}
