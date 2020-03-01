@@ -44,13 +44,20 @@ module Body
       hash = JSON.parse(response.body)
       block=[
         {
+          "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "こんにちは、mates profileです<br>あなたに質問が届いています。"
+            }
+        },
+        {
             "type": "actions",
             "elements": [
               {
                 "type": "button",
                   "text": {
                       "type": "plain_text",
-                      "text": "今すぐ答えよう！",
+                      "text": "いますぐ答えよう！",
                       "emoji": false
                   },
                 "value": "#{content} #{id}"
@@ -58,13 +65,13 @@ module Body
             ]
         }
       ]
-      body = {
-        :token => ENV['SLACK_BOT_USER_TOKEN'],
-        :channel => "#general",
-        :text  => "あなたに質問が届いています",
-        :blocks => block
-      }
-      conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
+      # body = {
+      #   :token => ENV['SLACK_BOT_USER_TOKEN'],
+      #   :channel => "#general",
+      #   :text  => "あなたに質問が届いています",
+      #   :blocks => block
+      # }
+      # conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
 
       response = conn.get do |req|  
         req.url '/api/conversations.list'
@@ -76,6 +83,7 @@ module Body
       p hash
       # hash["channels"]
        for var in hash["channels"] do
+        p "それぞれのユーザーでうまく行っているか1"
         p var["user"]
 
         response_self=natsuo.get do |req|
@@ -84,7 +92,11 @@ module Body
         end
         knowns= JSON.parse(response_self.body)
         for var2 in knowns do
+          p "それぞれのユーザーでうまく行っているか2"
+          p var2["slack_user_id"]
           if var["user"]==var2["slack_user_id"]
+            p "それぞれのユーザーでうまく行っているか3"
+            p var2["slack_user_id"]
             body={
               :content => content
             }
