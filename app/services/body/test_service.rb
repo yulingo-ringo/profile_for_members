@@ -115,7 +115,7 @@ module Body
                   :avatar => image,
                   :slack_user_id => id,
                   :workspace_id => @json["team_id"],
-                  :workspace_avatar=> team["team"]["icon"]["image_34"]
+                  :workspace_avatar=> team["team"]["icon"]["image_34"],
                   :workspace_name => team["team"]["name"]
                 }
                 p body
