@@ -92,9 +92,6 @@ module Body
               conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}
            
             end
-    
-            
-          break
           end
         end
 
