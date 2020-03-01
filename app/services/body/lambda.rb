@@ -47,17 +47,12 @@ module Body
         p member["display_name"]
       end
        for var in hash["channels"] do
-        p "それぞれのユーザーでうまく行っているか1"
-        p var["user"]
-
-        response_self=natsuo.get do |req|
-          req.url "/api/v1/users"
-          req.headers["workspace-id"]= "TPUL203HT"
-        end
-        knowns= JSON.parse(response_self.body)        
+        p "slackにはいる人たち"
+        p var["user"]  
         for var2 in knowns do
           p "それぞれのユーザーでうまく行っているか2"
           p var2["slack_user_id"]
+          p var2["display_name"]
           if var["user"]==var2["slack_user_id"]
             p "それぞれのユーザーでうまく行っているか3"
             p var2["slack_user_id"]
