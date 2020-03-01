@@ -109,12 +109,12 @@ module Body
                 question  = @json["view"]["blocks"][0]["text"]["text"]
                 answer=@json["view"]["state"]["values"][block_id]["input1"]["value"]
                 p "valueありますか？"
-                body = {
-                    :token => ENV['SLACK_BOT_USER_TOKEN'],#あとでherokuで設定します
-                    :channel => "general",#こうするとDM内に返信できます
-                    :text  => "あなたの回答は#{@json["view"]["state"]["values"][block_id]["input1"]["value"]}です。回答が送信されました！"
-                    }
-                conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
+                # body = {
+                #     :token => ENV['SLACK_BOT_USER_TOKEN'],#あとでherokuで設定します
+                #     :channel => "general",#こうするとDM内に返信できます
+                #     :text  => "あなたの回答は#{@json["view"]["state"]["values"][block_id]["input1"]["value"]}です。回答が送信されました！"
+                #     }
+                # conn.post '/api/chat.postMessage',body.to_json, {"Content-type" => 'application/json',"Authorization"=>"Bearer #{ENV['SLACK_BOT_USER_TOKEN']}"}#ヘッダーはつけなければいけないらしい、このままで大丈夫です。
 
                 body ={
                     :content => question,
