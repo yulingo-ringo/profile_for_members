@@ -54,10 +54,7 @@ module Body
           req.url "/api/v1/users"
           req.headers["workspace-id"]= "TPUL203HT"
         end
-        knowns= JSON.parse(response_self.body)
-        p "ナツオのget Users の返信"
-        p knowns
-        p "上がget Usersの返信"
+        knowns= JSON.parse(response_self.body)        
         for var2 in knowns do
           p "それぞれのユーザーでうまく行っているか2"
           p var2["slack_user_id"]
