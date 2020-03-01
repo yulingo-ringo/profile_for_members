@@ -18,33 +18,33 @@ module Body
       p "この間がjson"
       p @json
       p "この間がjson"
-      if @json[:event][:type]=="user_change"
-        p "hi"
-        response = conn.get do |req|  
-          req.url '/api/users.list'
-          req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
-        end
-        info = JSON.parse(response&.body)
-        members=info["members"]
-        response = conn.get do |req|  
-          req.url '/api/team.info'
-          req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
-        end
-        team = JSON.parse(response&.body)
-        for member in members do
-          if member["is_bot"]==false&& member["profile"]["real_name"]!="Slackbot"
-            body ={
-              :display_name => member["profile"]["real_name"],
-              :avatar => member["profile"]["image_original"],
-              :slack_user_id => member["id"],
-              :workspace_id => team["team"]["id"],
-              :workspace_avatar=> team["team"]["icon"]["image_34"]
-            }
-            p body
-            natsuo.post '/api/v1/users',body.to_json, {"Content-type" => 'application/json'}
-          end
-        end
-      elsif @json[:event][:subtype] != "bot_message"
+      # if @json[:event][:type]=="user_change"
+      #   p "hi"
+      #   response = conn.get do |req|  
+      #     req.url '/api/users.list'
+      #     req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+      #   end
+      #   info = JSON.parse(response&.body)
+      #   members=info["members"]
+      #   response = conn.get do |req|  
+      #     req.url '/api/team.info'
+      #     req.params[:token] = ENV['SLACK_BOT_USER_TOKEN']
+      #   end
+      #   team = JSON.parse(response&.body)
+      #   for member in members do
+      #     if member["is_bot"]==false&& member["profile"]["real_name"]!="Slackbot"
+      #       body ={
+      #         :display_name => member["profile"]["real_name"],
+      #         :avatar => member["profile"]["image_original"],
+      #         :slack_user_id => member["id"],
+      #         :workspace_id => team["team"]["id"],
+      #         :workspace_avatar=> team["team"]["icon"]["image_34"]
+      #       }
+      #       p body
+      #       natsuo.post '/api/v1/users',body.to_json, {"Content-type" => 'application/json'}
+      #     end
+      #   end
+      if @json[:event][:subtype] != "bot_message"
           if @json[:event][:text].include?("<@")
             response = conn.get do |req|  
                 req.url '/api/users.list'
@@ -116,8 +116,7 @@ module Body
                   :slack_user_id => id,
                   :workspace_id => @json["team_id"],
                   :workspace_avatar=> team["team"]["icon"]["image_34"]
-                  # :workspace_name => 
-                  # :workspace_link =>
+                  :workspace_name => team["team"]["name"]
                 }
                 p body
                 natsuo.post '/api/v1/users',body.to_json, {"Content-type" => 'application/json'}
